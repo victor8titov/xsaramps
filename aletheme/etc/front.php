@@ -121,11 +121,14 @@ function ale_head() {
 	?>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<link rel="shortcut icon" href="<?php ale_favicon(); ?>" />
-	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-
-	<!--
-	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php ale_rss(); ?>" />
-	-->
+	
+	<?php
+	/*
+	*	pingback_url - УРЛ для уведомлений на XML-RPC файл (xmlrpc.php);
+	*	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+	*	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php ale_rss(); ?>" />
+	*/
+	?>
 
 	<?php
 }

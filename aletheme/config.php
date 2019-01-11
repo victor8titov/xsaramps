@@ -845,6 +845,7 @@ function aletheme_get_images_sizes() {
  */
 function aletheme_get_post_types() {
 	return array(
+        /*
         'gallery' => array(
             'config' => array(
                 'public' => true,
@@ -862,12 +863,17 @@ function aletheme_get_post_types() {
             'columns'    => array(
                 'first_image',
             )
+            
         ),
-        'services' => array(
+        */
+        /*
+        * -------------------------------- POST TYPE - КАТАЛОГ ------------------------------------------------------------------
+        */
+        'catalog' => array(
             'config' => array(
                 'public' => true,
-                'menu_position' => 20,
-                'menu_icon' => 'dashicons-format-audio',
+                'menu_position' => 10,
+                //'menu_icon' => 'dashicons-format-audio',
                 'has_archive'   => true,
                 'supports'=> array(
                     'title',
@@ -876,9 +882,81 @@ function aletheme_get_post_types() {
                 ),
                 'show_in_nav_menus'=> true,
             ),
-            'singular' => 'Сервис',
-            'multiple' => 'Сервисы'
+            'singular' => 'Каталог',
+            'multiple' => 'Каталог'
         ),
+        /*
+        *           end post type
+        */
+
+        /*
+        * -------------------------------- POST TYPE - ПРОЕКТЫ ------------------------------------------------------------------
+        */
+        'project' => array(
+            'config' => array(
+                'public' => true,
+                'menu_position' => 10,
+                //'menu_icon' => 'dashicons-format-audio',
+                'has_archive'   => true,
+                'supports'=> array(
+                    'title',
+                    'editor',
+                    'thumbnail',
+                ),
+                'show_in_nav_menus'=> true,
+            ),
+            'singular' => 'Проекты',
+            'multiple' => 'Проекты'
+        ),
+        /*
+        *           end post type
+        */
+
+        /*
+        * -------------------------------- POST TYPE - КОМАНДА ------------------------------------------------------------------
+        */
+        'team' => array(
+            'config' => array(
+                'public' => true,
+                'menu_position' => 10,
+                //'menu_icon' => 'dashicons-format-audio',
+                'has_archive'   => true,
+                'supports'=> array(
+                    'title',
+                    'editor',
+                    'thumbnail',
+                ),
+                'show_in_nav_menus'=> true,
+            ),
+            'singular' => 'Команда',
+            'multiple' => 'Команда'
+        ),
+        /*
+        *           end post type
+        */
+
+        /*
+        * -------------------------------- POST TYPE - ВИДЕО ------------------------------------------------------------------
+        */
+        'video' => array(
+            'config' => array(
+                'public' => true,
+                'menu_position' => 10,
+                //'menu_icon' => 'dashicons-format-audio',
+                'has_archive'   => true,
+                'supports'=> array(
+                    'title',
+                    'editor',
+                    'thumbnail',
+                ),
+                'show_in_nav_menus'=> true,
+            ),
+            'singular' => 'Видео',
+            'multiple' => 'Видео'
+        ),
+        /*
+        *           end post type
+        */
     );
 }
 
