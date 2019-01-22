@@ -43,3 +43,19 @@ function mw_clear_wp_head()
   //remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 ); // Удаляет ссылки на предыдущую и следующую статьи
 }
 add_action( 'wp_head', 'mw_clear_wp_head', 1 );
+
+/*-----------------------------------------------------------------------------------*/
+/*          Разрешаем загрузку запрещенных типов файлов
+/*-----------------------------------------------------------------------------------*/
+add_filter( 'upload_mimes', 'upload_allow_types' );
+function upload_allow_types( $mimes ) {
+	// разрешаем новые типы
+	$mimes['dwg']  = 'image/vnd.dwg'; 
+	
+    /*
+	// отключаем имеющиеся
+	unset( $mimes['mp4a'] );
+    */
+    
+	return $mimes;
+}

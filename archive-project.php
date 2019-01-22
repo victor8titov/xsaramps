@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<h1>I'ts page for project</h1>
+<h1>I'ts page for project archive-project.php</h1>
     <!-- Content -->
     <div class="portfolio-center-align">
 

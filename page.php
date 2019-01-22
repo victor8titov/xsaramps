@@ -1,5 +1,6 @@
 <?php get_header(); ?>
     <!-- Content -->
+    <h1>i'ts page.php</h1>
     <div class="page-center">
         <div class="content">
             <?php if (have_posts()) : while (have_posts()) : the_post(); ?>

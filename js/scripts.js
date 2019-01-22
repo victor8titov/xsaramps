@@ -3,6 +3,20 @@ jQuery(function($) {
 
     // Custom jQuery Code Here
 
+    //  инициализация фреймворка slick 
+    //  слайды фото
+    $('.slider-type').slick({
+        
+    });
+   
+
+
+              
+
+
+
+
+
     $('.portfolioslider').flexslider({
         animation:'slide',
         smoothHeight:true,

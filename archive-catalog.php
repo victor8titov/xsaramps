@@ -1,6 +1,37 @@
 <?php get_header(); ?>
-<h1>I'ts page for catalog</h1>
-    <!-- Content -->
+<h1>I'ts page archive-catalog.php</h1>
+<!--            Цикл на основе get_posts()      -->
+<?php
+    global $post;
+    $args = array( //  Parmetrs for loop
+        'numberposts' => -1,
+        'post_type' => 'catalog',
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'catalog-category',
+                //'field'    => 'slug',
+                //'terms' => 'concrete_park'
+                'operator' => 'EXISTS',
+            )
+        ),
+        //'category' => 14,
+    );    
+    $myposts = get_posts( $args );
+    foreach($myposts as $post): 
+?>
+<?php setup_postdata($post); ?>
+    <!-- Data -->
+    <p> this !!!</p>
+    <p><?php the_title(); ?></p>
+<?php 
+    endforeach; 
+    wp_reset_postdata(); // Сбрасываем переменную $post
+?>
+<!--            END LOOP get_posts()            --->    
+
+<?php /*
+
+<!-- Content -->
     <div class="portfolio-center-align">
 
         <div class="portfolio-categories">
@@ -63,4 +94,5 @@
 
         </div>
     </div>
+    */ ?>
 <?php get_footer(); ?>

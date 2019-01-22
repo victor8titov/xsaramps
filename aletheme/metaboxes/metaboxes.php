@@ -167,7 +167,33 @@ class Ale_Meta_Box {
 			}		
 						
 			switch ( $field['type'] ) {
-
+				/*
+				text
+				text_small
+				text_medium
+				text_date
+				text_date_timestamp
+				text_datetime_timestamp
+				text_time
+				text_money
+				colorpicker
+				textarea
+				textarea_small
+				textarea_code
+				select
+				custom_post_select
+				radio_inline
+				radio
+				checkbox
+				multicheck
+				title
+				wysiwyg
+				taxonomy_select
+				taxonomy_radio
+				taxonomy_multicheck
+				file_list
+				file
+				*/
 				case 'text':
 					echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', '' !== $meta ? $meta : $field['std'], '" />','<p class="ale_metabox_description">', $field['desc'], '</p>';
 					break;
@@ -191,7 +217,7 @@ class Ale_Meta_Box {
 					echo '<input class="ale_timepicker text_time" type="text" name="', $field['id'], '" id="', $field['id'], '" value="', '' !== $meta ? $meta : $field['std'], '" /><span class="ale_metabox_description">', $field['desc'], '</span>';
 					break;					
 				case 'text_money':
-					echo '$ <input class="ale_text_money" type="text" name="', $field['id'], '" id="', $field['id'], '" value="', '' !== $meta ? $meta : $field['std'], '" /><span class="ale_metabox_description">', $field['desc'], '</span>';
+					echo '<input class="ale_text_money" type="text" name="', $field['id'], '" id="', $field['id'], '" value="', '' !== $meta ? $meta : $field['std'], '" /><span class="ale_metabox_description">', $field['desc'], '</span>';
 					break;
 				case 'colorpicker':
 					echo '<div id="' . esc_attr( $field['id'] . '_picker' ) . '" class="colorSelector"><div style="' . esc_attr( 'background-color:' . ('' !== $meta ? $meta : $field['std']) ) . '"></div></div>';

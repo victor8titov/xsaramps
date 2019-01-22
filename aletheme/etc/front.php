@@ -41,16 +41,24 @@ function ale_enqueue_styles() {
 
 	// add general css file
 	wp_register_style( 'aletheme_general_css', THEME_URL . '/styles/main.css', array(), ALETHEME_THEME_VERSION, 'all');
-	
-    wp_enqueue_style('aletheme_general_css');
+	//	стили для слайдера slick
+	wp_register_style( 'slick-theme_css', THEME_URL . '/styles/libs/slick-theme.css');
+	wp_register_style( 'slick_css', THEME_URL . '/styles/libs/slick.css');
 
+
+	wp_enqueue_style('aletheme_general_css');
+	wp_enqueue_style('slick-theme_css');
+	wp_enqueue_style('slick_css');
+
+	/*
 	//	разобраться нужны ли эти стили!
     if(is_page_template('template-about.php') or is_page_template('template-award.php')){
         wp_enqueue_style('jquery.jscrollpane');
     }
     if(is_page_template('template-press.php')){
         wp_enqueue_style('jquery.fancybox-1.3.4');
-    }
+	}
+	*/
 }
 add_action( 'wp_enqueue_scripts', 'ale_enqueue_styles' );
 
@@ -94,14 +102,18 @@ function ale_enqueue_scripts() {
     wp_register_script( 'ale_modules', THEME_URL . '/js/modules.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
     wp_register_script( 'ale_scripts', THEME_URL . '/js/scripts.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
 
-	wp_enqueue_script( 'jquery-form' );
-	wp_enqueue_script( 'ale_modernizr' );
-	wp_enqueue_script( 'html5-shim' );
-
-    wp_register_script( 'jquery.mousewheel', THEME_URL . '/js/libs/jquery.mousewheel.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
+	wp_register_script( 'jquery.mousewheel', THEME_URL . '/js/libs/jquery.mousewheel.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
     wp_register_script( 'jquery.fancybox', THEME_URL . '/js/libs/jquery.fancybox-1.3.4.pack.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
     wp_register_script( 'jquery.jscrollpane.min', THEME_URL . '/js/libs/jquery.jscrollpane.min.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
     wp_register_script( 'scrollable', THEME_URL . '/js/libs/scrollable.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
+	
+	// 	скрипт для работы слайдера на основе библиотеки slick 
+	//	http://kenwheeler.github.io/slick/
+	wp_register_script(	'slick', THEME_URL . '/js/libs/slick.min.js', array( 'jquery' ));
+
+	//wp_enqueue_script( 'jquery-form' );
+	wp_enqueue_script( 'ale_modernizr' );
+	wp_enqueue_script( 'html5-shim' );
 
     wp_enqueue_script( 'jquery.mousewheel' );
     wp_enqueue_script( 'jquery.fancybox' );
@@ -109,6 +121,7 @@ function ale_enqueue_scripts() {
     wp_enqueue_script( 'scrollable' );
     wp_enqueue_script( 'ale_modules' );
 	wp_enqueue_script( 'ale_scripts' );
+	wp_enqueue_script( 'slick');
 
 
 }
@@ -221,6 +234,8 @@ function ale_footer() {
 	}
 	?>
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+	
 <?php
 }
 
