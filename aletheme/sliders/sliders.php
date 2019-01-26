@@ -480,6 +480,7 @@ class Aletheme_Sliders
 		<?php
 	}
 }
+/* end init class Aletheme_Sliders
 
 /**
  * Register Sliders post type to make it queriable 

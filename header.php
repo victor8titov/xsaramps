@@ -29,13 +29,54 @@
 	wp_head(); 
 	?>
 </head>
+
+
 <body <?php body_class(); ?> >
+<header>
 
-<?php if(ale_get_option('sitelogo')){
-    echo "<img src='".ale_get_option('sitelogo')."' />";
-} ?>
-<?php //ale_option('sitelogo'); ?>
+<!-- ---------------------------------------------------------------------
+					HEADER			
+-------------------------------------------------------------------------->
+<section class = "top_header">
+	<section class = "left_logo">
+		<h1>
+		ПРОЕКТИРОВАНИЕ СТРОИТЕЛЬСТВО СКЕЙТ-ПАРКОВ Лидеры индустрии, передовые технологии
+		</h1>
+	</section>
+	<section class = "center_logo">
+		<?php if(ale_get_option('sitelogo')){
+			echo "<img src='".ale_get_option('sitelogo')."' class = 'logo'/>";
+		} ?>
+	</section>
+	<section class = "right_logo">
+		<h1>
+		info@xsaramps.com 8(800)500-90-46 8(918)211-82-20
+		</h1>
+	</section>
+</section>
+<section class = "bottom_header">
 
+	<nav class="top_navigation">
+			<div class="">
+				<?php
+						if ( has_nav_menu( 'header_menu' ) ) {
+							wp_nav_menu(array(
+								'theme_location'=> 'header_menu',
+								'menu'			=> 'Header Menu',
+								'menu_class'	=> 'ali_headermenu cf',
+								'walker'		=> new Aletheme_Nav_Walker(),
+								'container'		=> '',
+							));
+						}
+						?>
+				
+			</div>
+		</nav>
+		<section class = "bread_crumbs">
+		<?php echo get_breadcrumbs(); ?>
+		</section>
+
+</section>
 <?php 
 /*
 
@@ -87,21 +128,14 @@
 */
 
 ?>
-<h1>HEADER</h1>
-<nav class="top_navigation">
- 		<div class="wrapper">
- 			 <?php
-                    if ( has_nav_menu( 'header_menu' ) ) {
-                        wp_nav_menu(array(
-                            'theme_location'=> 'header_menu',
-                            'menu'			=> 'Header Menu',
-                            'menu_class'	=> 'ali_headermenu cf',
-                            'walker'		=> new Aletheme_Nav_Walker(),
-                            'container'		=> '',
-                        ));
-                    }
-                    ?>
-        	
- 		</div>
- 	</nav>
-<hr>
+
+
+
+
+
+<!-- ---------------------------------------------------------------------
+					END HEADER			
+-------------------------------------------------------------------------->
+</header>
+
+

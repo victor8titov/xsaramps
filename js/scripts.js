@@ -8,15 +8,7 @@ jQuery(function($) {
     $('.slider-type').slick({
         
     });
-   
-
-
-              
-
-
-
-
-
+    
     $('.portfolioslider').flexslider({
         animation:'slide',
         smoothHeight:true,
@@ -28,11 +20,58 @@ jQuery(function($) {
         smoothHeight:true,
         controlNav: false
     });
+    
+    /*
+    //  при инициализации сбрасывает настройки установленные в админке
+    $('#ale-slider-slider_for_experiment-du4gc').flexslider({
+        //animation: 'slide',
+        //smoothHeight: true,
+       // Primary Controls
+        //controlNav: false,               //Boolean: Create navigation for paging control of each clide? Note: Leave true for manualControls usage
+        //directionNav: true,             //Boolean: Create navigation for previous/next navigation? (true/false)
+        prevText: "back",           //String: Set the text for the "previous" directionNav item
+        nextText: "next",               //String: Set the text for the "next" directionNav item
+        //slideshow: false,
+        
+    });
+    */
+
+
+    /*
+    *           моя проба ajax на главной странице
+    var number_page = 0;
+    $("#VT_button").click(function() {
+       
+        
+         
+    //console.log(myajax.url);
+        $.ajax({
+            url: myajax.url,
+            type: 'POST',
+            data: {
+                action: 'myAjax',
+                nonce_code: myajax.nonce,
+                page: number_page,
+            },
+            beforeSend: function( xhr ) {
+                $('#VT_button').text("Загрузка, 5 сек...");
+            },
+            success: function( data ) {
+                $('#VT_button').text('More foto');
+                $('.button_ajax').before( data );
+                number_page++;
+                if (number_page > 2 ) $('#VT_button').remove(); 
+                
+            }
+        })
+        
+    });
 
 });
 
-Modernizr.addTest('ipad', function () {
-    return !!navigator.userAgent.match(/iPad/i);
+*           end ajax example for home page
+*/
+Modernizr.addTest('ipad', function () {    return !!navigator.userAgent.match(/iPad/i);
 });
 
 Modernizr.addTest('iphone', function () {

@@ -59,3 +59,69 @@ function upload_allow_types( $mimes ) {
     
 	return $mimes;
 }
+
+add_action('wp_enqueue_scripts', 'my_ajax_data', 99);
+function my_ajax_data() {
+   
+    wp_localize_script('ale_scripts','myajax',array(
+        'url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('myajax-nonce'),
+    ));
+}
+
+
+/*
+*               example ajax for home page 
+*
+//  проверяем, является ли текущий запрос AJAX запросом WordPress
+if (wp_doing_ajax()) {
+
+    add_action('wp_ajax_myAjax', 'test_func' );
+    add_action('wp_ajax_nopriv_myAjax', 'test_func');
+    
+    function test_func() {
+
+        //  проверяем nonce код, если проверка не пройдена прерываем обработку
+        check_ajax_referer('myajax-nonce','nonce_code');
+        
+        
+        // тело запроса здесь формируем то что отдадим фронтенду
+       $images = array(
+            'http://xsaramps/wp-content/uploads/2019/01/X9h6FreG-5k.jpg',
+            'http://xsaramps/wp-content/uploads/2019/01/GOPR0007.jpg',
+            'http://xsaramps/wp-content/uploads/2019/01/GOPR0008.jpg',
+            'http://xsaramps/wp-content/uploads/2019/01/GOPR0009.jpg',
+            'http://xsaramps/wp-content/uploads/2019/01/GOPR0011.jpg',
+            'http://xsaramps/wp-content/uploads/2019/01/DJI_0007.jpg-nggid0267-ngg0dyn-0x360-00f0w010c010r110f110r010t010.jpg',
+            'http://xsaramps/wp-content/uploads/2019/01/DJI_0007-1.jpg-nggid0268-ngg0dyn-0x360-00f0w010c010r110f110r010t010.jpg',
+            'http://xsaramps/wp-content/uploads/2019/01/GOPR0002-1.jpg',
+            'http://xsaramps/wp-content/uploads/2019/01/DJI_0008.jpg-nggid0269-ngg0dyn-0x360-00f0w010c010r110f110r010t010.jpg',
+       );
+       $number_page = $_POST['page'] * 3 + 1;
+       if ($_POST['page'] < 3): 
+        
+            ?> 
+            <div class = "foto_ajax">
+            <?php 
+            for ($i=0; $i < 3; $i++ ) :
+                ?>
+                <div class = "img_ajax">
+                <img src = "<?php echo $images[$number_page] ?>" alt = "" >
+                </div>
+                <?php
+                $number_page++;
+            endfor;        
+            ?>        
+            </div> <?php
+
+        endif;
+        
+      
+      wp_die();  
+    };
+
+}
+
+*           end ajax example
+*/
+

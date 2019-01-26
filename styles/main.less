@@ -2,6 +2,85 @@
 
 
 /*! Your Custom code here */
+/* -------------------------------------------------------------
+*                   HEADER
+-----------------------------------------------------------------*/
+
+header {
+    .top_header {
+        padding-top: 30px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-content: center;
+        .left_logo h1, .right_logo h1 {
+            font-size: 20px;
+            font-family: sans-serif;
+            font-weight: 400;
+        }
+        .left_logo {
+            flex-basis: 230px;
+
+
+        }
+        .center_logo {}
+        .right_logo {
+            flex-basis: 230px;
+        }
+    
+    }
+    .bottom_header {
+        .top_navigation {
+            text-align: center;
+            background-color: black;
+           
+            ul { 
+                list-style-type: none;
+                li {
+                    display: inline-block;
+                    a {
+                        display: inline-block;
+                        padding: 12px 10px;
+                        text-decoration: none;
+                        color: white;
+                        font-size: 15px;
+                        font-family: Helvetica, sans-serif;
+                        .transition();
+                        &:hover {
+                            background-color: #cccccc;
+                        }
+                    }
+                    
+                }
+            }
+        }
+
+        .bread_crumbs {
+            font-size: 15px;
+            text-align: center;
+            a {
+                text-decoration: none;
+                color: black;
+                display: inline-block;
+                padding: 5px;
+                .transition();
+                &:hover {
+                    background: rgb(218, 218, 218);
+                }
+            }
+        }
+    }   
+    
+   
+    
+}
+
+/* -------------------------------------------------------------
+*                   END HEADER
+-----------------------------------------------------------------*/
+
+
+
 
 .wrapper {
     width: 1000px;
@@ -76,4 +155,73 @@ body {
             }
         }
     }
+}
+
+
+
+/*
+*           Стиль слайдера для главной страницы
+*/
+.home {
+    .ale-slider-slides {
+        .flexslider {
+            width: 100%;
+            .flex-viewport {
+                .slides {
+                    .clearFloat();
+                    li {
+                        figure {
+                            img {
+                               
+                            }
+                        }
+                    }
+                    .flex-active-slide {}
+                }
+            }
+            .flex-direction-nav {
+                display: none;
+            }
+        }  
+    }
+    .metaslider-nivo  {
+        .nivoSlider {
+            .nivo-directionNav {
+                display: none;
+            }
+        }
+    }
+
+
+    .images_ajax {
+        .foto_ajax {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-around;
+            align-content: center;
+            width: 100%;
+            .img_ajax {
+                
+                flex-basis: 300px;
+                img {
+                    width: 100%;
+                }
+    
+                
+            }
+        }
+        .button_ajax {
+            margin: 0 auto;
+            border-top: 1px solid black;
+            width: 80%;
+            text-align: center;
+            padding: 10px;
+            font-size: 15px;
+            font-style: italic;
+            text-transform: uppercase;
+            cursor: pointer;
+            .linear-gradient( rgb(134, 134, 134), rgb(255,255,255));
+        }
+    }
+    
 }

@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<h1>I'ts home page </h1>
+<h1>I'ts home page home.php</h1>
 <br><br>
     <!-- Content -->
     <div class="blog-center-align">
