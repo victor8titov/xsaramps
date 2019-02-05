@@ -1,4 +1,5 @@
 <?php get_header(); ?>
+<h1>single.php</h1>
     <!-- Content -->
     <div class="blog-center-align">
 
@@ -25,7 +26,7 @@
 
                 <?php
 
-                    echo get_the_post_thumbnail($post->ID,'post-minibox');
+                    //echo get_the_post_thumbnail($post->ID,'post-minibox');
                 ?>
 
 
@@ -43,6 +44,25 @@
             <?php endwhile; else: ?>
                 <?php ale_part('notfound')?>
             <?php endif; ?>
+
+            <section class = "gallery-masonry">
+                <?php
+                $arr =  get_attached_media('image');
+                foreach($arr as $name => $value): 
+                //print_r($value);
+                ?>
+                
+                    <div class = "item">
+                        <?php echo wp_get_attachment_image($name, 'medium') ?>
+                    </div>
+                            
+                       
+                <?php endforeach; ?>    
+            </section>
+            
+            
+
+
             <!-- Line -->
             <div class="blog-line"></div>
             <?php comments_template(); ?>

@@ -124,4 +124,69 @@ if (wp_doing_ajax()) {
 
 *           end ajax example
 */
+/*
+*   Загрузка еще постов на странице "Проекты"
+*/
+function true_load_posts(){
+ 
+	$args = unserialize( stripslashes( $_POST['query'] ) );
+	$args['paged'] = $_POST['page'] + 1; // следующая страница
+	$args['post_status'] = 'publish';
+    
+    // обычно лучше использовать WP_Query, но не здесь
+	query_posts( $args );
+	// если посты есть
+	if( have_posts() ) :
+ 
+		// запускаем цикл
+		while( have_posts() ): the_post();
+            
+			get_template_part( 'partials/project_content' );
+ 
+		endwhile;
+ 
+    endif;
+    wp_reset_query();
+	die();
+}
+add_action('wp_ajax_loadmore', 'true_load_posts');
+add_action('wp_ajax_nopriv_loadmore', 'true_load_posts');
 
+/*
+*   Загрузка массива адресов и возможно метаданных для карты
+*/
+
+function data_for_map() {    
+
+
+    // массив данных для отправки
+    $dataMap['points'] = array();
+    $dataMap['mapOptions'] = array(
+            'iconPoint' => ale_get_option('pointmap'),        
+    );
+
+    // обычно лучше использовать WP_Query, но не здесь
+	query_posts( '&posts_per_page=-1&post_type=project' );
+	// если посты есть
+	if( have_posts() ) : 
+		// запускаем цикл
+		while( have_posts() ): the_post();            
+        $dataMap['points'][] = array(            
+                'adress'       => ale_get_meta('coordinate_park'),
+                'title'        => get_the_title(),
+                'link'         => get_permalink(),
+                'ID'           => get_the_ID(),
+                'pointOptions' => '',           
+        );
+ 
+		endwhile; 
+    endif;
+    wp_reset_query();
+    
+    echo json_encode($dataMap);
+    die();
+
+
+};
+add_action('wp_ajax_data_for_map', 'data_for_map');
+add_action('wp_ajax_nopriv_data_for_map', 'data_for_map');

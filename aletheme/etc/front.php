@@ -99,8 +99,13 @@ function ale_enqueue_scripts() {
 	// add modernizr
 	wp_register_script( 'ale_modernizr', THEME_URL . '/js/libs/modernizr-2.5.3.min.js', array( 'jquery' ), ALETHEME_THEME_VERSION, false );
 
+	wp_register_script('yandex_maps', 'https://api-maps.yandex.ru/2.1/?apikey=fc2b99b5-0458-49ac-a99c-54bcb913494b&lang=ru_RU',array('jquery'));
+
+	//	add masonory for gallary 
+	wp_register_script( 'ale_masonry', THEME_URL . '/js/libs/masonry.pkgd.min.js', array( 'jquery' ), ALETHEME_THEME_VERSION, false );
+
     wp_register_script( 'ale_modules', THEME_URL . '/js/modules.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
-    wp_register_script( 'ale_scripts', THEME_URL . '/js/scripts.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
+    wp_register_script( 'ale_scripts', THEME_URL . '/js/scripts.js', array( 'jquery' ), ALETHEME_THEME_VERSION, false );
 
 	wp_register_script( 'jquery.mousewheel', THEME_URL . '/js/libs/jquery.mousewheel.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
     wp_register_script( 'jquery.fancybox', THEME_URL . '/js/libs/jquery.fancybox-1.3.4.pack.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
@@ -113,7 +118,10 @@ function ale_enqueue_scripts() {
 
 	//wp_enqueue_script( 'jquery-form' );
 	wp_enqueue_script( 'ale_modernizr' );
+	wp_enqueue_script( 'ale_masonry' );
 	wp_enqueue_script( 'html5-shim' );
+
+	wp_enqueue_script('yandex_maps');
 
     wp_enqueue_script( 'jquery.mousewheel' );
     wp_enqueue_script( 'jquery.fancybox' );

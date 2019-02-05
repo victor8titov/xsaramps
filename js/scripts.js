@@ -20,6 +20,223 @@ jQuery(function($) {
         smoothHeight:true,
         controlNav: false
     });
+
+    var $grid = $('.grid').masonry({
+            // options
+            itemSelector: '.grid-item',
+            columnWidth: 5,
+            //gutter: 25,
+            fitWidth: true,
+        });
+    
+
+    // обработчик событий делегированный на карточки парков
+    $('.grid').on('click', '.flipper' , function(event){
+            var obj = event.currentTarget;
+            var target = $(obj);
+           target.toggleClass('flipper_event');
+           //return false;            
+    });
+    
+    /* -----------------------------------------------------------------------
+    *               загрузка проектов в archive-project.php
+    *               кнопка загрузить еще
+    -------------------------------------------------------------------------*/
+    //  инициация ajax запроса и работа с кнопкой.
+    $('#true_loadmore').click(function(){
+		$(this).text('Загружаю...'); // изменяем текст кнопки, вы также можете добавить прелоадер
+		var data = {
+			'action': 'loadmore',
+			'query': true_posts,
+			'page' : current_page
+        };        
+		$.ajax({
+			url:ajaxurl, // обработчик
+			data:data, // данные
+			type:'POST', // тип запроса
+			success:function(data){
+                // если данные были отправлены 
+				if( data ) { 
+                    $('#true_loadmore').text('Загрузить ещё'); // вставляем новые посты
+                    
+                    // нужно обернуть в объект jquery для работы метода от фреймворка masonary
+                    var content = $( data )
+                    
+                    // доболяем методом jquery в объект 
+                    $grid.append( content )
+                    // применяем метод masonory для того чтобы он перерасчитал расположение елементов
+                    .masonry( 'appended', content );                   
+                    
+					current_page++; // увеличиваем номер страницы на единицу
+                    
+                    if (current_page == max_pages) {
+                        $("#true_loadmore").remove();
+                        } // если последняя страница, удаляем кнопку
+				} else {
+					$('#true_loadmore').remove(); // если мы дошли до последней страницы постов, скроем кнопку
+				}
+			}
+		});
+    });
+    
+
+    /* -----------------------------------------------------------------------
+    *               yandex maps
+    -------------------------------------------------------------------------*/
+    
+    // Функция ymaps.ready() будет вызвана, когда
+    // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+    
+    ymaps.ready(init);
+    function init(){ 
+        // Создание карты.    
+        var myMap = new ymaps.Map("map", {
+            // Координаты центра карты.
+            center: [45.039203, 38.976953],
+            controls: ['zoomControl'],
+            zoom: 7
+        });
+        
+        /*
+        *   обращаемся к наборам поведения карт
+        *    Доступ к поведениям карты предоставляется полем behaviors.
+        *   применяем метод disable для отключеня поведеня скорола
+        *   выключаем зоом при скроле
+        */
+       myMap.behaviors.disable('scrollZoom');
+        
+       /*
+        * ajax запрос на получения адресов и данных для карты от сервера
+        */
+        var dataMap = {},
+            counter = 0;
+
+        $.ajax({
+            url: ajaxurl,
+            data: {
+                'action': 'data_for_map',            
+            },
+            type: 'POST',
+            success: function(data) {
+                dataMap = JSON.parse(data);
+                console.log('получение данных по ajax');
+                console.log(dataMap);
+                counter = dataMap.points.length;
+                add_coords_data_map();
+                
+            }
+        });
+
+        /*
+        *   после получения объекта с адресами 
+        *   вызываем функц add_coords_data_map
+        *   получаем в объект dataMap координаты каждого адреса
+        */
+        function add_coords_data_map() {
+            for( var i=0; i < dataMap.points.length; i++ ) {
+                ymaps.geocode(dataMap.points[i].adress , {
+                    results: 1
+                    }).then( function (res) { 
+                        var firstGeoObject = res.geoObjects.get(0),
+                            coords = firstGeoObject.geometry.getCoordinates(),
+                            request = res.metaData.geocoder.request;
+                        //console.log(res);    
+                        //console.log(request);
+                        dataMap.points.forEach( function (point) {
+                            if (point.adress === request) {
+                                point.coords = coords; 
+                            };
+                        });
+
+                        counter--;
+                        if (counter === 0) { add_points_to_map() };
+
+                    }, function(err) {
+                        console.log("Ошибка ассинхронной передачи геокодирования:" + err);
+                    });
+            }; 
+        }; // end add_coords_data_map()  
+        
+        /*
+        *   после выполнения add_coords_data_map
+        *   вызываем add_points_to_map
+        *   создаем кластер
+        *   добовляем маркеры и устанавливаем их стили
+        *   добовляем кластеры на карту
+        */
+        function add_points_to_map() {
+            var myClusterer = new ymaps.Clusterer();
+            
+            dataMap.points.forEach( function(point) {
+                var myPlacemark = new ymaps.Placemark(point.coords, {
+                    hintContent: '<div class="yandexMaps-hintHeader"><p>' + point.title + '</p></div>',
+                    balloonContentHeader: '<div class="yandexMaps-balloonHeader"><h3>' + point.title + '</h3></div>',
+                    balloonContentBody: '<div class="yandexMaps-balloonBody"><p>'+ point.adress+'</p></div>',
+                    balloonContentFooter: '<div class="ynadexMaps-ballonFooter"><a href="'+ point.link +'">Открыть</a></div>',                    
+                }, {                    
+                    iconLayout: 'default#image',                    
+                    iconImageHref: dataMap.mapOptions.iconPoint,
+                    iconImageSize: [30, 30],
+                    iconImageOffset: [-14, 0],                    
+                });
+                point.geoObject = myPlacemark;
+                
+                myClusterer.add(myPlacemark);
+            });
+            myMap.geoObjects.add(myClusterer);  
+        }; // end add_points_to_map
+
+        /*
+        *   Обработчик событий клика на адрес
+        *   показывает на карте метку
+        */
+       $('.grid').on('click', '#show_point_map', function(event){
+            var target = $(event.currentTarget),
+                    ID = parseInt(target.attr("data-id"));
+
+            // ищем метку по ID
+            for(var i=0; i<dataMap.points.length; i++) {
+                var point = dataMap.points[i];
+               
+                if (point.ID !== ID) continue;
+                else {
+                    //  переместим фокус карты на нашу точку
+                    //  координаты и сам объект берем с объекта dataMap                    
+                    myMap.setCenter(point.coords, 13, {    checkZoomRange: true}).then(function(){
+                        /*  после выполнения setCenter метод возвращет объект promise
+                        *   применяем метод them объекта promise
+                        *   выполняется функция только после выполнения метода setCenter
+                        *   открываем баллоон для геообъекта в фокусе
+                        */
+                        point.geoObject.balloon.open();
+                    })
+                    // покидаем цикл for               
+                    break;
+                };
+            }; 
+       }); // end event click link 
+
+
+
+    }; // end init();
+
+        
+                
+        
+        
+   
+        
+     
+        
+        
+        
+        
+        
+   
+    
+    
+
+    
     
     /*
     //  при инициализации сбрасывает настройки установленные в админке
@@ -65,10 +282,11 @@ jQuery(function($) {
             }
         })
         
-    });
+    });*/
 
 });
 
+/*
 *           end ajax example for home page
 */
 Modernizr.addTest('ipad', function () {    return !!navigator.userAgent.match(/iPad/i);
@@ -440,4 +658,5 @@ jQuery(function($) {
         });
     }
 });
+
 

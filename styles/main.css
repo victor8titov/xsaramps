@@ -341,6 +341,92 @@ template {
 }
 /*! Your Custom code here */
 /* -------------------------------------------------------------
+*                   GALLERY POJECT MASONARY
+-----------------------------------------------------------------*/
+.gallery-masonry {
+  max-width: 1000px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  margin: 0 auto;
+}
+.gallery-masonry:before,
+.gallery-masonry:after {
+  content: "";
+  display: table;
+}
+.gallery-masonry:after {
+  clear: both;
+}
+.gallery-masonry .item {
+  float: left;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
+}
+/* -------------------------------------------------------------
+*                   WHO-IS-IT CLASS FOR NAME PAGE
+-----------------------------------------------------------------*/
+.who_is_it {
+  position: absolute;
+  top: 150px;
+  left: 0px;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-perspective-origin: 100% 50%;
+  perspective-origin: 100% 50%;
+  z-index: 1000;
+}
+.who_is_it .icon-wrap {
+  display: block;
+  width: 30px;
+  height: 50px;
+  background-color: #b6b6b6;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+.who_is_it .icon-wrap svg.icon {
+  position: relative;
+  top: 50%;
+  -webkit-transition: fill 0.3s;
+  transition: fill 0.3s;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  fill: #fff;
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+}
+.who_is_it .text {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: #fff;
+  width: 300px;
+  height: 100%;
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid black;
+  -webkit-transform: rotateY(90deg);
+  transform: rotateY(90deg);
+  -webkit-transform-origin: 0% 50%;
+  transform-origin: 0% 50%;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.who_is_it:hover {
+  color: #566473;
+}
+.who_is_it:hover .icon-wrap {
+  background-color: #fff;
+}
+.who_is_it:hover .icon-wrap .icon {
+  fill: #000000;
+}
+.who_is_it:hover .text {
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+/* -------------------------------------------------------------
 *                   HEADER
 -----------------------------------------------------------------*/
 header .top_header {
@@ -368,6 +454,7 @@ header .bottom_header .top_navigation {
 }
 header .bottom_header .top_navigation ul {
   list-style-type: none;
+  margin: 0;
 }
 header .bottom_header .top_navigation ul li {
   display: inline-block;
@@ -405,8 +492,185 @@ header .bottom_header .bread_crumbs a:hover {
   background: #dadada;
 }
 /* -------------------------------------------------------------
-*                   END HEADER
+*                   PROJECT PAGE
 -----------------------------------------------------------------*/
+.post-type-archive-project {
+  /*
+    *                               navigation
+    */
+  /*
+    *                           main
+    */
+}
+.post-type-archive-project .navigation h1 {
+  text-align: center;
+}
+.post-type-archive-project .navigation nav ul {
+  list-style-type: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+.post-type-archive-project .navigation nav ul li {
+  display: inline-block;
+}
+.post-type-archive-project .navigation nav ul li a {
+  display: inline-block;
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 18px;
+  text-decoration: none;
+  font-family: sans-serif;
+  color: black;
+  transition: background 300ms ease-in-out;
+}
+.post-type-archive-project .navigation nav ul li a:hover {
+  background: #bbb;
+}
+.post-type-archive-project .main .grid {
+  width: 90%;
+  margin: 0 auto;
+}
+.post-type-archive-project .main .grid .grid-item {
+  width: 320px;
+  height: 200px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  -webkit-perspective: 1200;
+  perspective: 1200;
+  -moz-transform: perspective(1200px);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+}
+.post-type-archive-project .main .grid .grid-item .flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: 0.3s linear;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .front,
+.post-type-archive-project .main .grid .grid-item .flipper .back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  backface-visibility: hidden;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .front {
+  transform: rotateX(0deg);
+}
+.post-type-archive-project .main .grid .grid-item .flipper .front img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back {
+  transform: rotateX(-180deg);
+  font-size: 12px;
+  text-align: center;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back h2 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks {
+  display: inline-block;
+  margin: 0 auto;
+  width: 80%;
+  box-sizing: border-box;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks:before,
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks:after {
+  content: "";
+  display: table;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks:after {
+  clear: both;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .city,
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .year,
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .area,
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .whoes,
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .point_map {
+  background: #bbb;
+  padding: 8px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  float: left;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .whoes {
+  width: 30%;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .point_map {
+  max-width: 50%;
+  text-align: left;
+  padding-left: 10px;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back .content {
+  text-align: left;
+  padding: 5px;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back .content p {
+  margin: 0;
+}
+.post-type-archive-project .main .grid .grid-item .flipper .back .content a {
+  text-align: center;
+}
+.post-type-archive-project .main .grid .grid-item .flipper_event {
+  transform: rotateX(180deg);
+}
+.post-type-archive-project .main .grid .grid-item--width2 {
+  width: 500px;
+  height: 300px;
+}
+.post-type-archive-project .main .grid .grid-item--height2 {
+  height: 140px;
+}
+.post-type-archive-project .main #true_loadmore {
+  background-color: #ddd;
+  /* сервый фон */
+  border-radius: 2px;
+  /* закругление углов */
+  display: block;
+  /* блочный элемент, на случай, если захотите использовать <a> */
+  text-align: center;
+  /* выравнивание текста по центру */
+  font-size: 14px;
+  font-size: 0.875rem;
+  /* размер шрифта */
+  font-weight: 800;
+  /* начертание */
+  letter-spacing: 1px;
+  /* межбуквенный интервал */
+  cursor: pointer;
+  /* курсор мыши при наведении такой же, как при наведении на ссылку */
+  text-transform: uppercase;
+  padding: 10px 0;
+  /* внутренние отступы сверху и снизу у кнопки */
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.3s ease-in-out;
+  /* CSS-анимация*/
+}
+.post-type-archive-project .main #true_loadmore:hover {
+  background-color: #767676;
+  color: #fff;
+}
+.post-type-archive-project .map {
+  width: 100%;
+  height: 400px;
+  margin-top: 50px;
+}
+.post-type-archive-project .map .yandexMaps-hintHeader {
+  font-style: italic;
+}
+.post-type-archive-project .map .yandexMaps-balloonHeader {
+  font-size: 18px;
+  font-family: Helvetica, sans-serif;
+}
 .wrapper {
   width: 1000px;
   margin: 0 auto;

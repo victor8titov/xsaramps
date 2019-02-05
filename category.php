@@ -1,5 +1,6 @@
 <?php get_header(); ?>
     <!-- Content -->
+    <h1>category.php</h1>
     <div class="blog-center-align">
 
         <!-- Blog Caption -->

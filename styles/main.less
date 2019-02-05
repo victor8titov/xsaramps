@@ -3,6 +3,111 @@
 
 /*! Your Custom code here */
 /* -------------------------------------------------------------
+*                   GALLERY POJECT MASONARY
+-----------------------------------------------------------------*/
+.gallery-masonry {
+    max-width: 1000px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    margin: 0 auto;
+    .clearFloat();
+    .item {
+        float: left;
+        //width: 80px;
+        //height: 60px;
+        border: 2px solid hsla(0, 0%, 0%, 0.5);
+        
+    }
+    .item-width2 {}
+}
+/* -------------------------------------------------------------
+*                   WHO-IS-IT CLASS FOR NAME PAGE
+-----------------------------------------------------------------*/
+
+.who_is_it {
+    position: absolute;
+    top: 150px;
+    left: 0px;
+
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-perspective-origin: 100% 50%;
+    perspective-origin: 100% 50%;
+
+    z-index: 1000;
+    //-webkit-transform: translateY(-50%);
+    //transform: translateY(-50%);
+    
+    .icon-wrap {
+        display: block;
+        width: 30px;
+        height: 50px;
+        background-color: #b6b6b6;
+        
+        -webkit-transition: background-color 0.3s;
+        transition: background-color 0.3s;
+                
+        svg.icon {
+            position: relative;
+            top: 50%;
+            -webkit-transition: fill 0.3s;
+            transition: fill 0.3s;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            fill: #fff;
+            display: block;
+            margin: 0 auto;
+            padding: 0; 
+        }
+    }
+    .text {
+        position: absolute;
+        top: 0;
+        left: 100%; 
+        background: #fff;
+        width: 300px;
+        height: 100%;
+        text-align: center;
+        line-height: 50px;
+        border: 1px solid black;
+
+        
+        -webkit-transform: rotateY(90deg);
+        transform: rotateY(90deg);
+        -webkit-transform-origin: 0% 50%;
+        transform-origin: 0% 50%;
+        
+        
+        -webkit-transition: -webkit-transform 0.3s;
+        transition: transform 0.3s;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    &:hover {
+        color: #566473;
+        .icon-wrap {
+            background-color: #fff;
+            .icon {
+                fill: #000000;
+            }
+        }
+        .text {
+            -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+        }
+        
+    }
+    
+}
+
+
+
+
+
+
+
+/* -------------------------------------------------------------
 *                   HEADER
 -----------------------------------------------------------------*/
 
@@ -36,6 +141,7 @@ header {
            
             ul { 
                 list-style-type: none;
+                margin: 0;
                 li {
                     display: inline-block;
                     a {
@@ -76,8 +182,199 @@ header {
 }
 
 /* -------------------------------------------------------------
-*                   END HEADER
+*                   PROJECT PAGE
 -----------------------------------------------------------------*/
+
+.post-type-archive-project {
+    
+    /*
+    *                               navigation
+    */
+    .navigation {
+        h1 {
+            text-align: center;
+        }
+        nav {
+            ul {
+                list-style-type: none;
+                border-bottom: 1px solid black;
+                text-align: center;
+                li {
+                    display: inline-block;
+                    
+                    a {
+                        display: inline-block;
+                        padding: 10px;
+                        margin-right: 10px;
+                        font-size: 18px;
+                        text-decoration: none;
+                        font-family: sans-serif;
+                        color: black;
+                        transition: background 300ms ease-in-out;
+                        &:hover {
+                            background: #bbb;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    /*
+    *                           main
+    */
+    .main {
+        .grid {
+            width: 90%;
+            margin: 0 auto;           
+
+            .grid-item {
+                width: 320px;                
+                height: 200px;
+                margin-bottom: 5px;
+                margin-right: 5px;
+                
+                -webkit-perspective: 1200;
+                perspective: 1200;
+                -moz-transform: perspective(1200px);
+                
+                transform-style: preserve-3d;
+                -webkit-transform-style: preserve-3d;
+                -moz-transform-style: preserve-3d; 
+                .flipper {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+
+                    transform-style: preserve-3d;
+                    transition: .3s linear; 
+                    
+                    .front, .back {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 8px;
+                        
+                        backface-visibility: hidden;
+                    }
+                    .front{
+                        transform: rotateX(0deg);
+                        
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 8px;
+                        }
+                    }
+                    .back{
+                        transform: rotateX(-180deg);
+                        font-size: 12px;
+                        text-align: center;
+                        border: 1px solid #bbb;
+                        border-radius: 8px;
+                        h2 {
+                            margin-top: 5px;
+                            margin-bottom:5px;
+                        }
+                        .info_blocks {
+                            .clearFloat();
+                            display: inline-block;
+                            margin: 0 auto;
+                            width: 80%;
+                            box-sizing: border-box;
+
+                            .city, .year, .area, .whoes, .point_map {
+                                background: #bbb;
+                                padding: 8px;
+                                margin-right: 5px;
+                                margin-bottom: 5px;
+                                float: left;
+                            }
+                            .city{}
+                            .year{}
+                            .area{}
+                            .whoes{
+                                width: 30%;
+                            }
+                            .point_map {
+                                //float: none;
+                                //clear: both;                                
+                                //.clearFloat();
+                                max-width: 50%;
+                                text-align: left;
+                                padding-left: 10px;
+                            }                            
+                        }
+                        .content{
+                            text-align: left;
+                            padding: 5px;
+                            p {
+                                margin: 0;
+                                
+                            }
+                            a {
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+                .flipper_event {
+                    transform:rotateX(180deg);
+                }
+                
+            }
+            .grid-item--width2 {
+                width: 500px;
+                height: 300px;
+            }
+            .grid-item--height2 {
+                height: 140px;
+            }
+        }
+        #true_loadmore{
+            background-color: #ddd; /* сервый фон */
+            border-radius: 2px; /* закругление углов */
+            display: block; /* блочный элемент, на случай, если захотите использовать <a> */
+            text-align: center; /* выравнивание текста по центру */
+            font-size: 14px; font-size: 0.875rem; /* размер шрифта */
+            font-weight: 800; /* начертание */
+            letter-spacing: 1px; /* межбуквенный интервал */
+            cursor: pointer; /* курсор мыши при наведении такой же, как при наведении на ссылку */
+            text-transform: uppercase;
+            padding: 10px 0; /* внутренние отступы сверху и снизу у кнопки */
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.3s ease-in-out; /* CSS-анимация*/
+        }
+        #true_loadmore:hover{
+            background-color: #767676;
+            color: #fff;
+        }
+        
+
+    }
+    .map {
+        width: 100%;
+        height: 400px;
+        margin-top: 50px;
+        .yandexMaps {
+            &-hintHeader {
+                font-style: italic;
+            }
+            &-balloonHeader {
+                font-size: 18px;
+                font-family: Helvetica, sans-serif;
+            }
+            &-balloonBody {}
+            &-balloonFooter {}
+        }
+    }
+
+
+}
+
+
 
 
 

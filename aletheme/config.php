@@ -60,6 +60,12 @@ function aletheme_get_options() {
                         "id" => "ale_favicon",
                         "std" => "",
                         "type" => "upload");
+    
+    $options[] = array( "name" => "Uplaod a point Map icon",
+                        "desc" => "Upload or put the link of your point Map icon",
+                        "id" => "ale_pointmap",
+                        "std" => "",
+                        "type" => "upload");                    
 
 	$options[] = array( "name" => "Comments Style",
 						"desc" => "Choose your comments style. If you want to use DISQUS comments please install and activate this plugin from <a href=\"" . admin_url('plugin-install.php?tab=search&type=term&s=Disqus+Comment+System&plugin-search-input=Search+Plugins') . "\">Wordpress Repository</a>.  If you want to use Livefyre Realtime Comments comments please install and activate this plugin from <a href=\"" . admin_url('plugin-install.php?tab=search&type=term&s=Livefyre+Realtime+Comments&plugin-search-input=Search+Plugins') . "\">Wordpress Repository</a>.",
@@ -307,7 +313,10 @@ function aletheme_metaboxes($meta_boxes) {
 	$meta_boxes = array();
 
     $prefix = "ale_";
-
+    /*------------------------------------------------------------------------------------------
+    *                   МЕТАДАННЫЕ ДЛЯ ПОСТОВ РАЗДЕЛА КАТАЛОГ
+    *                   meta data for custom post type catalog
+    ------------------------------------------------------------------------------------------------*/
     $meta_boxes[] = array(
         'id'         => 'catalog_metadata',
         'title'      => 'Данные по проекту',
@@ -315,8 +324,8 @@ function aletheme_metaboxes($meta_boxes) {
         'context'    => 'normal',
         'priority'   => 'high',
         'show_names' => true, // Show field names on the left
-       // 'show_on'    => array( 'key' => 'page-template', 'value' => array('template-press.php'), ), // Specific post templates to display this metabox
-        'fields' => array(
+        // 'show_on'    => array( 'key' => 'page-template', 'value' => array('template-press.php'), ), // Specific post templates to display this metabox
+        'fields'     => array(
             array(
                 'name' => 'Цена парка',
                 'desc' => 'Укажите стоимость проекта',
@@ -351,7 +360,59 @@ function aletheme_metaboxes($meta_boxes) {
                      
         )
     );
-    
+
+
+     /*------------------------------------------------------------------------------------------
+    *                   МЕТАДАННЫЕ ДЛЯ ПОСТОВ РАЗДЕЛА ПРОЕКТЫ
+    *                   meta data for custom post type PROJECT
+    ------------------------------------------------------------------------------------------------*/
+    $meta_boxes[] = array(
+        'id'         => 'project_metadata',
+        'title'      => 'Данные по проекту',
+        'pages'      => array( 'project', ), // Post type
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'show_names' => true, // Show field names on the left        
+        'fields'    => array(
+            array(
+                'name' => 'Площадь парка',
+                'desc' => 'Площадь занимаемая парком',
+                'id'   => $prefix . 'area_park',
+                'type' => 'text',
+            ),
+
+            array(
+                'name' => 'Дней работ',
+                'desc' => 'Сколько ушло времени на строительство',
+                'id'   => $prefix . 'day_work',
+                'type' => 'text',
+            ),
+            array(
+                'name' => 'Адрес парка',
+                'desc' => 'Адрес будет использован для отображения точки на карте',
+                'id'   => $prefix . 'coordinate_park',
+                'type' => 'text',
+            ),
+            array(
+                'name' => 'Имя заказчика',
+                'desc' => 'Организация заказавшая парк',
+                'id'   => $prefix . 'whoes_name',
+                'type' => 'text',
+            ),
+            array(
+                'name'    => 'Тип заказчика',
+                'desc'    => 'Тип заказчика',
+                'id'      => $prefix . 'whoes_type',
+                'type'    => 'multicheck',
+                'options' => array(
+                    'state'    => 'Государственные',
+                    'business' => 'Бизнес',
+                    'private'  => 'Частные',
+                ),
+            ),
+        ),
+        
+    );
     /*
     $meta_boxes[] = array(
         'id'         => 'home_page_metabox',
@@ -443,7 +504,16 @@ function aletheme_metaboxes($meta_boxes) {
  */
 function aletheme_get_images_sizes() {
 	return array(
-
+        'project' => array(
+            array(
+                'name'      => 'project-medium',
+                'width'     => 320,
+                'height'    => 200,
+                'crop'      => true,
+            ),
+                  
+        ),
+        /*
         'gallery' => array(
             array(
                 'name'      => 'gallery-thumba',
@@ -478,7 +548,7 @@ function aletheme_get_images_sizes() {
                 'crop'      => true,
             ),
         ),
-
+        */
 
     );
 }
@@ -641,13 +711,13 @@ function aletheme_get_taxonomies() {
             'multiple'    => '',
         ),
         */
-        /*
-        *
-        *----------------------------------------------------------------- Каталог ---------------------------
-        */
+        /* ---------------------------------------------------------------------------------------------------
+        *                       КАТАЛОГ     
+        *                       Таксономи для пост тайпа каталог
+        -------------------------------------------------------------------------------------------------------*/
         
         'catalog-category'    => array(
-            'for'        => array('catalog', 'page'),
+            'for'        => array('catalog', 'page'),   // таксономи есть у castom post type catalog и страницы нужно для циклов и общей структуры
             'config'    => array(
                 'sort'        => true, //Следует ли этой таксономии запоминать порядок в котором созданные элементы
                 //'args'        => array('orderby' => 'term_order'),
@@ -656,6 +726,42 @@ function aletheme_get_taxonomies() {
             'singular'    => 'Вид парка',
             'multiple'    => 'Виды парков',
         ),
+
+        /* ---------------------------------------------------------------------------------------------------
+        *                       ПРОЕКТЫ     
+        *                       taxonomy for custom post type ПРОЕКТЫ
+        -------------------------------------------------------------------------------------------------------*/
+
+        'type' => array(
+            'for' => array('project'),
+            'config' => array(
+                'sort' => true,
+                'hierarchical' => true, // таксономия будет древовидная (как категории)
+            ),
+            'singular' => 'Вид парка',
+            'multiple' => 'Виды парков',
+        ),
+        'year' => array(
+            'for' => 'project',
+            'config' => array(
+                'sort' => true,
+                'hierarchical' => true, // таксономия будет древовидная (как категории)
+
+            ),
+            'singular' => 'Год постройки',
+            'multiple' => 'Год постройки',
+        ),
+        'city' => array(
+            'for' => 'project',
+            'config' => array(
+                'sort' => true,
+                'hierarchical' => true, // таксономия будет древовидная (как категории)
+
+            ),
+            'singular' => 'Город проекта',
+            'multiple' => 'Города проекта',
+        ),
+
         
     );
 }
@@ -697,7 +803,7 @@ function aletheme_get_sliders() {
  * @return array
  */
 function aletheme_get_post_types_with_gallery() {
-	return array('gallery');
+	return array('');
 }
 
 /**
