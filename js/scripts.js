@@ -31,11 +31,15 @@ jQuery(function($) {
     
 
     // обработчик событий делегированный на карточки парков
+    var lastItem;
     $('.grid').on('click', '.flipper' , function(event){
-            var obj = event.currentTarget;
-            var target = $(obj);
+            var target = $(event.currentTarget);           
            target.toggleClass('flipper_event');
-           //return false;            
+           if ( lastItem && !(lastItem.is(target)) ) {
+               if ( lastItem.hasClass('flipper_event') ) lastItem.removeClass('flipper_event');               
+           };           
+           lastItem = target;
+           
     });
     
     /* -----------------------------------------------------------------------
@@ -47,13 +51,13 @@ jQuery(function($) {
 		$(this).text('Загружаю...'); // изменяем текст кнопки, вы также можете добавить прелоадер
 		var data = {
 			'action': 'loadmore',
-			'query': true_posts,
-			'page' : current_page
+			'query': ale.true_posts,
+			'page' : ale.current_page
         };        
 		$.ajax({
-			url:ajaxurl, // обработчик
-			data:data, // данные
-			type:'POST', // тип запроса
+			url:ale.ajax_load_url,  // обработчик
+			data:data,              // данные
+			type:'POST',            // тип запроса
 			success:function(data){
                 // если данные были отправлены 
 				if( data ) { 
@@ -67,9 +71,9 @@ jQuery(function($) {
                     // применяем метод masonory для того чтобы он перерасчитал расположение елементов
                     .masonry( 'appended', content );                   
                     
-					current_page++; // увеличиваем номер страницы на единицу
+					ale.current_page++; // увеличиваем номер страницы на единицу
                     
-                    if (current_page == max_pages) {
+                    if (ale.current_page == ale.max_pages) {
                         $("#true_loadmore").remove();
                         } // если последняя страница, удаляем кнопку
 				} else {
@@ -112,7 +116,7 @@ jQuery(function($) {
             counter = 0;
 
         $.ajax({
-            url: ajaxurl,
+            url: ale.ajax_load_url,
             data: {
                 'action': 'data_for_map',            
             },
@@ -219,9 +223,137 @@ jQuery(function($) {
 
 
     }; // end init();
+    /*
+    *   end map
+    */
 
-        
+    /* -----------------------------------------------------------------------
+    *               event menu filter
+    -------------------------------------------------------------------------*/
+
+    /*
+    *   событие нажатие на кнопку Расшиненный фильтр
+    */
+    //  коллекция выбранных элементов;
+    var items = [];
+
+    $('#buttonFilterBox').on('click', function(event) {
+        var target = $('.filterBox');
+        console.log('event click buttomFilterBox');
+        target.toggleClass('show-hidden');
+        return false;
+    });
+
+    /*
+    *   анимация выбора опций
+    */
+   $('.filterBox .filter ul li a').on('click', function(event) {
+       // обработчик клика на кнопку фильтра
+       var target = $(event.currentTarget);
+       
+       //   работаем со стилем кнопок типа фильтра       
+       target.toggleClass('select');
+       
+       //   ищем ul с пунктами выбора
+       var item = target.parent().children('ul');
+        //var item = target.next();
+
+       //   работаем с массивом ul
+       var id_item = 0;
+       items.forEach(function(value, index) {
+            if( item.is(value) ) {
+                id_item = index;                
+            }
+       }); 
+      
+       var height = parseInt(item.outerHeight(true)); 
+       /*
+       *    удаляем из массива и убираем с экрана блок опций
+       */
+       if ( item.is( items[id_item] ) ) {
+            item.animate({
+                opacity: 0,
+                top: '100%',
+            },{
                 
+                done: function() {
+                    item.css({
+                        //opacity: 0.0,
+                        //display: 'none',
+                        //top: "100%",
+                        zIndex: 0,
+                    });
+                }
+            });
+            
+           items.splice(id_item,1);           
+            
+           for (var i = 0; i < id_item; i++) {
+                //var top = parseInt(items[i].css('top'));
+                //top -= height;
+                items[i].animate({
+                    top: "-=" + height +"px",
+                },
+                {
+                    //duration: 400, 
+                });                
+            
+            }                    
+            
+            return false; 
+       }
+       /*
+       *    добовляем в коллекцию и показваем блок опции на экране
+       */
+       else {
+           //   item.outerHeight(true) 
+           //   для расчета высоты с padding + border + margin
+                                 
+            items.forEach(function(value) {
+                //var top = parseInt(value.css('top'));
+                //top += height;
+                value.animate({
+                    top: "+=" + height + "px",
+                },
+                {
+                    //duration: 400, 
+                });                
+            });
+            item.animate({
+                opacity: 1,
+            });
+            item.css({
+                //opacity: 1.0,
+                //visibility: 'visible',
+                //display: 'block',
+                zIndex: 100,
+            });
+                       
+            
+            items.push(item);
+            //console.log('add:' + items);
+            return false; 
+        }
+
+         
+    });
+        
+    /*
+    *               SUBMIT
+    *       Обработка запроса фильтра 
+    *       отправление на прямые ссылки 
+    *       или
+    *       отправка на шаблон обработки запроса формы 
+    */  
+   $('.filter').on('submit', function(event) {
+    var coll_meta = $('input:checkbox[name="form_area_park[]"]:checked, input:checkbox[name="form_whoes_type[]"]:checked');    
+    var coll_tax = $('input:checkbox[name="form_type[]"]:checked, input:checkbox[name="form_city[]"]:checked , input:checkbox[name="form_years[]"]:checked');
+    
+    if (coll_tax.length === 1 && coll_meta.length === 0) {           
+            event.preventDefault();
+            location = coll_tax.attr("data-href");
+        };
+   });         
         
         
    

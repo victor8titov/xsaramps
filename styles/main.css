@@ -494,7 +494,10 @@ header .bottom_header .bread_crumbs a:hover {
 /* -------------------------------------------------------------
 *                   PROJECT PAGE
 -----------------------------------------------------------------*/
-.post-type-archive-project {
+.post-type-archive-project,
+.tax-type,
+.tax-years,
+.tax-city {
   /*
     *                               navigation
     */
@@ -502,18 +505,36 @@ header .bottom_header .bread_crumbs a:hover {
     *                           main
     */
 }
-.post-type-archive-project .navigation h1 {
+.post-type-archive-project .navigation,
+.tax-type .navigation,
+.tax-years .navigation,
+.tax-city .navigation {
+  position: relative;
+}
+.post-type-archive-project .navigation h1,
+.tax-type .navigation h1,
+.tax-years .navigation h1,
+.tax-city .navigation h1 {
   text-align: center;
 }
-.post-type-archive-project .navigation nav ul {
+.post-type-archive-project .navigation nav ul,
+.tax-type .navigation nav ul,
+.tax-years .navigation nav ul,
+.tax-city .navigation nav ul {
   list-style-type: none;
   border-bottom: 1px solid black;
   text-align: center;
 }
-.post-type-archive-project .navigation nav ul li {
+.post-type-archive-project .navigation nav ul li,
+.tax-type .navigation nav ul li,
+.tax-years .navigation nav ul li,
+.tax-city .navigation nav ul li {
   display: inline-block;
 }
-.post-type-archive-project .navigation nav ul li a {
+.post-type-archive-project .navigation nav ul li a,
+.tax-type .navigation nav ul li a,
+.tax-years .navigation nav ul li a,
+.tax-city .navigation nav ul li a {
   display: inline-block;
   padding: 10px;
   margin-right: 10px;
@@ -523,14 +544,146 @@ header .bottom_header .bread_crumbs a:hover {
   color: black;
   transition: background 300ms ease-in-out;
 }
-.post-type-archive-project .navigation nav ul li a:hover {
+.post-type-archive-project .navigation nav ul li a:hover,
+.tax-type .navigation nav ul li a:hover,
+.tax-years .navigation nav ul li a:hover,
+.tax-city .navigation nav ul li a:hover {
   background: #bbb;
 }
-.post-type-archive-project .main .grid {
+.post-type-archive-project .navigation .filterBox,
+.tax-type .navigation .filterBox,
+.tax-years .navigation .filterBox,
+.tax-city .navigation .filterBox {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  margin: 0 auto;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0px;
+  top: 100%;
+  z-index: 10;
+  color: white;
+  font-size: 15px;
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+}
+.post-type-archive-project .navigation .filterBox .filter,
+.tax-type .navigation .filterBox .filter,
+.tax-years .navigation .filterBox .filter,
+.tax-city .navigation .filterBox .filter {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
   width: 90%;
   margin: 0 auto;
 }
-.post-type-archive-project .main .grid .grid-item {
+.post-type-archive-project .navigation .filterBox .filter a,
+.tax-type .navigation .filterBox .filter a,
+.tax-years .navigation .filterBox .filter a,
+.tax-city .navigation .filterBox .filter a {
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+}
+.post-type-archive-project .navigation .filterBox .filter ul,
+.tax-type .navigation .filterBox .filter ul,
+.tax-years .navigation .filterBox .filter ul,
+.tax-city .navigation .filterBox .filter ul {
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 80%;
+}
+.post-type-archive-project .navigation .filterBox .filter ul li,
+.tax-type .navigation .filterBox .filter ul li,
+.tax-years .navigation .filterBox .filter ul li,
+.tax-city .navigation .filterBox .filter ul li {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  margin-right: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+.post-type-archive-project .navigation .filterBox .filter ul li a,
+.tax-type .navigation .filterBox .filter ul li a,
+.tax-years .navigation .filterBox .filter ul li a,
+.tax-city .navigation .filterBox .filter ul li a {
+  display: inline-block;
+  padding: 10px;
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+}
+.post-type-archive-project .navigation .filterBox .filter ul li a:hover,
+.tax-type .navigation .filterBox .filter ul li a:hover,
+.tax-years .navigation .filterBox .filter ul li a:hover,
+.tax-city .navigation .filterBox .filter ul li a:hover {
+  background-color: rgba(136, 136, 136, 0.5);
+}
+.post-type-archive-project .navigation .filterBox .filter ul li .select,
+.tax-type .navigation .filterBox .filter ul li .select,
+.tax-years .navigation .filterBox .filter ul li .select,
+.tax-city .navigation .filterBox .filter ul li .select {
+  background-Color: #bdbdbd80;
+}
+.post-type-archive-project .navigation .filterBox .filter ul li ul,
+.tax-type .navigation .filterBox .filter ul li ul,
+.tax-years .navigation .filterBox .filter ul li ul,
+.tax-city .navigation .filterBox .filter ul li ul {
+  width: 90%;
+  opacity: 0;
+  z-index: 0;
+  position: absolute;
+  left: 0%;
+  top: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  margin: 0 auto;
+  margin-top: 3px;
+  text-align: left;
+  padding: 10px;
+  padding-left: 10%;
+}
+.post-type-archive-project .navigation .filterBox .filter ul li ul li,
+.tax-type .navigation .filterBox .filter ul li ul li,
+.tax-years .navigation .filterBox .filter ul li ul li,
+.tax-city .navigation .filterBox .filter ul li ul li {
+  display: inline-block;
+  border: none;
+}
+.post-type-archive-project .navigation .filterBox .filter ul li ul li label input + span,
+.tax-type .navigation .filterBox .filter ul li ul li label input + span,
+.tax-years .navigation .filterBox .filter ul li ul li label input + span,
+.tax-city .navigation .filterBox .filter ul li ul li label input + span {
+  padding: 10px;
+}
+.post-type-archive-project .navigation .filterBox .filter ul li ul li label input:checked + span,
+.tax-type .navigation .filterBox .filter ul li ul li label input:checked + span,
+.tax-years .navigation .filterBox .filter ul li ul li label input:checked + span,
+.tax-city .navigation .filterBox .filter ul li ul li label input:checked + span {
+  background: #acf19180;
+}
+.post-type-archive-project .navigation .show-hidden,
+.tax-type .navigation .show-hidden,
+.tax-years .navigation .show-hidden,
+.tax-city .navigation .show-hidden {
+  visibility: visible;
+  opacity: 1;
+}
+.post-type-archive-project .main .grid,
+.tax-type .main .grid,
+.tax-years .main .grid,
+.tax-city .main .grid {
+  width: 90%;
+  margin: 0 auto;
+}
+.post-type-archive-project .main .grid .grid-item,
+.tax-type .main .grid .grid-item,
+.tax-years .main .grid .grid-item,
+.tax-city .main .grid .grid-item {
   width: 320px;
   height: 200px;
   margin-bottom: 5px;
@@ -542,7 +695,10 @@ header .bottom_header .bread_crumbs a:hover {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
 }
-.post-type-archive-project .main .grid .grid-item .flipper {
+.post-type-archive-project .main .grid .grid-item .flipper,
+.tax-type .main .grid .grid-item .flipper,
+.tax-years .main .grid .grid-item .flipper,
+.tax-city .main .grid .grid-item .flipper {
   position: relative;
   width: 100%;
   height: 100%;
@@ -550,7 +706,13 @@ header .bottom_header .bread_crumbs a:hover {
   transition: 0.3s linear;
 }
 .post-type-archive-project .main .grid .grid-item .flipper .front,
-.post-type-archive-project .main .grid .grid-item .flipper .back {
+.tax-type .main .grid .grid-item .flipper .front,
+.tax-years .main .grid .grid-item .flipper .front,
+.tax-city .main .grid .grid-item .flipper .front,
+.post-type-archive-project .main .grid .grid-item .flipper .back,
+.tax-type .main .grid .grid-item .flipper .back,
+.tax-years .main .grid .grid-item .flipper .back,
+.tax-city .main .grid .grid-item .flipper .back {
   position: absolute;
   left: 0;
   top: 0;
@@ -559,79 +721,152 @@ header .bottom_header .bread_crumbs a:hover {
   border-radius: 8px;
   backface-visibility: hidden;
 }
-.post-type-archive-project .main .grid .grid-item .flipper .front {
+.post-type-archive-project .main .grid .grid-item .flipper .front,
+.tax-type .main .grid .grid-item .flipper .front,
+.tax-years .main .grid .grid-item .flipper .front,
+.tax-city .main .grid .grid-item .flipper .front {
   transform: rotateX(0deg);
 }
-.post-type-archive-project .main .grid .grid-item .flipper .front img {
+.post-type-archive-project .main .grid .grid-item .flipper .front img,
+.tax-type .main .grid .grid-item .flipper .front img,
+.tax-years .main .grid .grid-item .flipper .front img,
+.tax-city .main .grid .grid-item .flipper .front img {
   width: 100%;
   height: 100%;
   border-radius: 8px;
 }
-.post-type-archive-project .main .grid .grid-item .flipper .back {
+.post-type-archive-project .main .grid .grid-item .flipper .back,
+.tax-type .main .grid .grid-item .flipper .back,
+.tax-years .main .grid .grid-item .flipper .back,
+.tax-city .main .grid .grid-item .flipper .back {
   transform: rotateX(-180deg);
   font-size: 12px;
   text-align: center;
   border: 1px solid #bbb;
   border-radius: 8px;
 }
-.post-type-archive-project .main .grid .grid-item .flipper .back h2 {
+.post-type-archive-project .main .grid .grid-item .flipper .back h2,
+.tax-type .main .grid .grid-item .flipper .back h2,
+.tax-years .main .grid .grid-item .flipper .back h2,
+.tax-city .main .grid .grid-item .flipper .back h2 {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks {
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks,
+.tax-type .main .grid .grid-item .flipper .back .info_blocks,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks {
   display: inline-block;
   margin: 0 auto;
   width: 80%;
   box-sizing: border-box;
 }
 .post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks:before,
-.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks:after {
+.tax-type .main .grid .grid-item .flipper .back .info_blocks:before,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks:before,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks:before,
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks:after,
+.tax-type .main .grid .grid-item .flipper .back .info_blocks:after,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks:after,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks:after {
   content: "";
   display: table;
 }
-.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks:after {
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks:after,
+.tax-type .main .grid .grid-item .flipper .back .info_blocks:after,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks:after,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks:after {
   clear: both;
 }
 .post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .city,
+.tax-type .main .grid .grid-item .flipper .back .info_blocks .city,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks .city,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks .city,
 .post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .year,
+.tax-type .main .grid .grid-item .flipper .back .info_blocks .year,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks .year,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks .year,
 .post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .area,
+.tax-type .main .grid .grid-item .flipper .back .info_blocks .area,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks .area,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks .area,
 .post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .whoes,
-.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .point_map {
+.tax-type .main .grid .grid-item .flipper .back .info_blocks .whoes,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks .whoes,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks .whoes,
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .point_map,
+.tax-type .main .grid .grid-item .flipper .back .info_blocks .point_map,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks .point_map,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks .point_map {
   background: #bbb;
   padding: 8px;
   margin-right: 5px;
   margin-bottom: 5px;
   float: left;
 }
-.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .whoes {
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .whoes,
+.tax-type .main .grid .grid-item .flipper .back .info_blocks .whoes,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks .whoes,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks .whoes {
   width: 30%;
 }
-.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .point_map {
+.post-type-archive-project .main .grid .grid-item .flipper .back .info_blocks .point_map,
+.tax-type .main .grid .grid-item .flipper .back .info_blocks .point_map,
+.tax-years .main .grid .grid-item .flipper .back .info_blocks .point_map,
+.tax-city .main .grid .grid-item .flipper .back .info_blocks .point_map {
   max-width: 50%;
   text-align: left;
   padding-left: 10px;
 }
-.post-type-archive-project .main .grid .grid-item .flipper .back .content {
+.post-type-archive-project .main .grid .grid-item .flipper .back .content,
+.tax-type .main .grid .grid-item .flipper .back .content,
+.tax-years .main .grid .grid-item .flipper .back .content,
+.tax-city .main .grid .grid-item .flipper .back .content {
   text-align: left;
   padding: 5px;
 }
-.post-type-archive-project .main .grid .grid-item .flipper .back .content p {
+.post-type-archive-project .main .grid .grid-item .flipper .back .content p,
+.tax-type .main .grid .grid-item .flipper .back .content p,
+.tax-years .main .grid .grid-item .flipper .back .content p,
+.tax-city .main .grid .grid-item .flipper .back .content p {
   margin: 0;
 }
-.post-type-archive-project .main .grid .grid-item .flipper .back .content a {
+.post-type-archive-project .main .grid .grid-item .flipper .back .content a,
+.tax-type .main .grid .grid-item .flipper .back .content a,
+.tax-years .main .grid .grid-item .flipper .back .content a,
+.tax-city .main .grid .grid-item .flipper .back .content a {
   text-align: center;
 }
-.post-type-archive-project .main .grid .grid-item .flipper_event {
+.post-type-archive-project .main .grid .grid-item .flipper_event,
+.tax-type .main .grid .grid-item .flipper_event,
+.tax-years .main .grid .grid-item .flipper_event,
+.tax-city .main .grid .grid-item .flipper_event {
   transform: rotateX(180deg);
 }
-.post-type-archive-project .main .grid .grid-item--width2 {
+.post-type-archive-project .main .grid .grid-item--width2,
+.tax-type .main .grid .grid-item--width2,
+.tax-years .main .grid .grid-item--width2,
+.tax-city .main .grid .grid-item--width2 {
   width: 500px;
   height: 300px;
 }
-.post-type-archive-project .main .grid .grid-item--height2 {
+.post-type-archive-project .main .grid .grid-item--height2,
+.tax-type .main .grid .grid-item--height2,
+.tax-years .main .grid .grid-item--height2,
+.tax-city .main .grid .grid-item--height2 {
   height: 140px;
 }
-.post-type-archive-project .main #true_loadmore {
+.post-type-archive-project .main .nofound,
+.tax-type .main .nofound,
+.tax-years .main .nofound,
+.tax-city .main .nofound {
+  width: 100%;
+  padding: 20px;
+}
+.post-type-archive-project .main #true_loadmore,
+.tax-type .main #true_loadmore,
+.tax-years .main #true_loadmore,
+.tax-city .main #true_loadmore {
   background-color: #ddd;
   /* сервый фон */
   border-radius: 2px;
@@ -655,19 +890,31 @@ header .bottom_header .bread_crumbs a:hover {
   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.3s ease-in-out;
   /* CSS-анимация*/
 }
-.post-type-archive-project .main #true_loadmore:hover {
+.post-type-archive-project .main #true_loadmore:hover,
+.tax-type .main #true_loadmore:hover,
+.tax-years .main #true_loadmore:hover,
+.tax-city .main #true_loadmore:hover {
   background-color: #767676;
   color: #fff;
 }
-.post-type-archive-project .map {
+.post-type-archive-project .map,
+.tax-type .map,
+.tax-years .map,
+.tax-city .map {
   width: 100%;
   height: 400px;
   margin-top: 50px;
 }
-.post-type-archive-project .map .yandexMaps-hintHeader {
+.post-type-archive-project .map .yandexMaps-hintHeader,
+.tax-type .map .yandexMaps-hintHeader,
+.tax-years .map .yandexMaps-hintHeader,
+.tax-city .map .yandexMaps-hintHeader {
   font-style: italic;
 }
-.post-type-archive-project .map .yandexMaps-balloonHeader {
+.post-type-archive-project .map .yandexMaps-balloonHeader,
+.tax-type .map .yandexMaps-balloonHeader,
+.tax-years .map .yandexMaps-balloonHeader,
+.tax-city .map .yandexMaps-balloonHeader {
   font-size: 18px;
   font-family: Helvetica, sans-serif;
 }

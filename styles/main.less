@@ -185,12 +185,13 @@ header {
 *                   PROJECT PAGE
 -----------------------------------------------------------------*/
 
-.post-type-archive-project {
+.post-type-archive-project, .tax-type, .tax-years, .tax-city {
     
     /*
     *                               navigation
     */
     .navigation {
+        position: relative;
         h1 {
             text-align: center;
         }
@@ -218,6 +219,108 @@ header {
                     
                 }
             }
+        }
+        .filterBox {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            margin: 0 auto;
+            
+            
+            //display: none;
+            visibility: hidden;
+            opacity: 0.0;
+            position: absolute;
+            left: 0px;
+            top: 100%;
+            
+            z-index: 10;
+            color: white;
+            font-size: 15px;
+            .transition();
+            
+            .filter {
+                position: relative;
+                font-family: Arial, Helvetica, sans-serif;
+                width: 90%;
+                margin: 0 auto;
+                a {
+                    text-decoration: none;
+                    font-size: 16px;
+                    color: white;
+
+                }
+                ul {
+                    
+                    list-style-type: none;
+                    margin: 0 auto;
+                    padding: 0;
+                    width: 80%;
+                    li {
+                        a {
+                            display: inline-block;
+                            padding: 10px;
+                            .transition();
+                            &:hover {
+                                background-color: rgba(136, 136, 136, 0.5);
+                                
+                            }
+                            
+                        }
+                        .select {
+                            background-Color: #bdbdbd80;
+                        }
+
+                        
+                        margin: 0;
+                        padding: 0;
+                        display: inline-block;
+                        
+                        margin-right: 15px;
+                        border: 1px solid rgba(255,255,255,0.5);
+                        text-align: center;
+                        ul {
+                            width: 90%;
+                            opacity: 0.0;
+                            //display: none;
+                            //visibility: hidden;
+                            z-index: 0;
+                            position: absolute;
+                            left: 0%;
+                            top: 100%;
+                            background: rgba(0, 0, 0, 0.8);
+                            margin: 0 auto;
+                            margin-top: 3px;                            
+                            text-align: left;
+                            padding: 10px;
+                            padding-left: 10%;
+                            //.transition();
+                            li {
+                                display: inline-block;
+                                border: none;
+                                label {                                    
+                                    input + span {
+                                        
+                                            padding: 10px;
+                                        }
+                                    input:checked + span  {
+                                        
+                                            background: #acf19180;
+                                        
+                                    }
+                                    
+                                    
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .show-hidden {
+            //display: block;
+            visibility: visible;
+            opacity: 1.0;
         }
     }
     /*
@@ -333,6 +436,10 @@ header {
             .grid-item--height2 {
                 height: 140px;
             }
+        }
+        .nofound {
+            width: 100%;
+            padding: 20px;
         }
         #true_loadmore{
             background-color: #ddd; /* сервый фон */

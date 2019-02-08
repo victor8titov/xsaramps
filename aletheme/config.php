@@ -741,7 +741,7 @@ function aletheme_get_taxonomies() {
             'singular' => 'Вид парка',
             'multiple' => 'Виды парков',
         ),
-        'year' => array(
+        'years' => array(
             'for' => 'project',
             'config' => array(
                 'sort' => true,

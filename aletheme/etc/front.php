@@ -18,17 +18,20 @@ if( !is_admin() ) add_filter('pre_get_posts', 'ale_exclude_search_pages');
  * Load needed options & translations into template.
  */
 function ale_init_js_vars() {
-	wp_localize_script(
-		'ale_scripts',
-		'ale',
+	global $wp_query;
+	wp_localize_script( 'ale_scripts', 'ale',
 		array(
+			'true_posts' 		=> serialize($wp_query->query_vars),
+        	'current_page' 		=> get_query_var('paged') ? get_query_var('paged') : 1,
+         	'max_pages' 		=> $wp_query->max_num_pages,
+         	
 			'template_dir'      => THEME_URL,
 			'ajax_load_url'     => site_url('/wp-admin/admin-ajax.php'),
 			'ajax_comments'     => (int) ale_get_option('ajax_comments'),
 			'ajax_posts'        => (int) ale_get_option('ajax_posts'),
 			'ajax_open_single'  => (int) ale_get_option('load_single_post'),
 			'is_mobile'         => (int) is_mobile(),
-			'msg_thankyou'  => __('Thank you for your comment!', 'aletheme'),
+			//'msg_thankyou'  => __('Thank you for your comment!', 'aletheme'),
 		)
 	);
 }
@@ -130,6 +133,9 @@ function ale_enqueue_scripts() {
     wp_enqueue_script( 'ale_modules' );
 	wp_enqueue_script( 'ale_scripts' );
 	wp_enqueue_script( 'slick');
+	
+	
+
 
 
 }

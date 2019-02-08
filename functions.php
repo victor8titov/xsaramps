@@ -60,6 +60,10 @@ function upload_allow_types( $mimes ) {
 	return $mimes;
 }
 
+
+/*
+*               example ajax for home page 
+*
 add_action('wp_enqueue_scripts', 'my_ajax_data', 99);
 function my_ajax_data() {
    
@@ -70,9 +74,7 @@ function my_ajax_data() {
 }
 
 
-/*
-*               example ajax for home page 
-*
+
 //  проверяем, является ли текущий запрос AJAX запросом WordPress
 if (wp_doing_ajax()) {
 
@@ -141,7 +143,7 @@ function true_load_posts(){
 		// запускаем цикл
 		while( have_posts() ): the_post();
             
-			get_template_part( 'partials/project_content' );
+			get_template_part( 'partials/project-content-ajax' );
  
 		endwhile;
  
