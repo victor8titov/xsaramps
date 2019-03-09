@@ -8,7 +8,7 @@
  * @param string $label
  * @param boolean $die 
  */
-function varDump($var, $label = '', $die = true) {
+function varDump($var, $label = '', $die = false) {
     echo $label . ': <pre>';
     print_r($var);
     echo '</pre>';

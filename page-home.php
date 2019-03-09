@@ -1,41 +1,79 @@
 <?php
 /*
-  * Template name: Home
-  * */
-
-get_header();
-
-/*
- if(ale_get_meta('descr1')){
-     echo ale_get_meta('descr1');
- }
+* Template name: Home
 */
 
-
-
- ?>
-    
-
+get_header(); ?>
 
 <div class = "wrapper" >
-
-
 <h1>I'ts Home page! page-home.php</h1>
 
 
+<!--            SLIDER          --->
+
+<pre>
 <?php 
-/*
-*               example ajax 
-*/
-
-
-/*
-<div class = "images_ajax">
-
-<div class = "button_ajax" id = "VT_button" >Foto</div>
-</div>
-*/
+    /*
+    *   времянка для визуала переменных и функ.
+    */
+    $stack_rwmb =  rwmb_meta( 'xsa_home_settings' );
+    $stack_img = get_post_meta($post->ID, 'home_slider_show_hidden');
+    print_r( get_post_meta($post->ID, 'xsa_home_slider_show_hidden') );      
+    print_r( get_post_meta($post->ID, 'xsa_home_slider_image') );      
+    print_r( get_post_meta($post->ID, 'xsa_home_slider_enable', true) );  
 ?>
+</pre>
+<div class="flexslider" style = "width: 800px;">
+  <ul class="slides">
+  <?php 
+    foreach ( get_post_meta($post->ID, 'xsa_home_slider_image' ) as $image ):  ?>
+    <li>
+      <?php echo wp_get_attachment_image( $image, 'large'); ?>      
+      <?php 
+            $swith = get_post_meta($post->ID, 'xsa_home_slider_enable', true);
+            if ( $swith ): 
+        ?>      
+      <p class="flex-caption">
+          <?php 
+                $array_image = image_info( $image );                
+                $source = get_post_meta( $post->ID, 'xsa_home_slider_description', true);
+                echo $array_image[ $source ];
+            ?>    
+      </p>
+        <?php endif; ?>
+    </li>
+<?php endforeach; ?> 
+  </ul>
+</div>
+<!--            end slider          --->
+
+<!--        Выборка 5 последних проектов            -->
+<div class = "five_block_project" >
+<?php
+    global $post; 
+    // не обязательно 
+    // 5 записей из рубрики 9
+    $myposts = get_posts( array(
+        'post_type' => 'project',
+        'posts_per_page' => 5,
+        ));
+    foreach( $myposts as $post ):
+            setup_postdata( $post );
+    ?>
+     
+<div <?php post_class(); ?> id="post-<?php the_ID(); ?>" style="display: inline-block;">
+<h1><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+<?php  echo get_the_post_thumbnail( get_the_ID() , 'thumbnail' ); ?>
+</div>
+
+<?php   
+    endforeach; 
+    wp_reset_postdata(); // сбрасываем переменную $post
+?>
+</div>
+
+<!--        end                 --->
+
 
 
 
@@ -49,55 +87,10 @@ get_header();
 
 <?php } /* конец while */ ?>
 
-
-
 <?php
-} // конец if
-else echo "<h2>Записей нет.</h2>";
+    } // конец if
+    else echo "<h2>Записей нет.</h2>";
 ?>
-
-
-
-
-
-
-
-
-
-<?php /*
-<h1>Пагинация для Галерей</h1>
-<section>
-    <?php //global $query_string; query_posts($query_string.'&posts_per_page=3');
-
-    if ( get_query_var( 'paged' ) ) { $paged = get_query_var( 'paged' ); }
-    elseif ( get_query_var( 'page' ) ) { $paged = get_query_var( 'page' ); }
-    else { $paged = 1; }
-
-
-    $custom_query = new WP_Query(array('post_type'=>'gallery','posts_per_page'=>'3','paged'=>$paged));
-
-
-   ?>
-    <?php if ($custom_query->have_posts()) : while ($custom_query->have_posts()) : $custom_query->the_post(); ?>
-        <!-- Item -->
-        <div>
-            <a href="<?php the_permalink(); ?>">
-                <?php the_title(); ?>
-            </a>
-            <div class="portfolio-text">
-                <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-                <p class="by">by <?php the_author(); ?></p>
-                <div class="text">
-                    <?php echo ale_trim_excerpt(15); ?>
-                </div>
-            </div>
-        </div>
-    <?php endwhile;  endif;  ?>
-</section>
- */ ?>
-
-
-<div class="pagination"><?php ale_page_links_custom($custom_query); ?></div>
 </div>
 <?php get_footer();
 

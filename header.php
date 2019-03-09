@@ -56,6 +56,8 @@
 		</div>
 		<?php	
 	}
+ale_get_name_url( get_post_meta( $post->ID, '_wp_page_template', true ) );	
+
 ?>
 <!--			end funciton			-->		
  

@@ -313,187 +313,7 @@ function aletheme_metaboxes($meta_boxes) {
 	$meta_boxes = array();
 
     $prefix = "ale_";
-    /*------------------------------------------------------------------------------------------
-    *                   МЕТАДАННЫЕ ДЛЯ ПОСТОВ РАЗДЕЛА КАТАЛОГ
-    *                   meta data for custom post type catalog
-    ------------------------------------------------------------------------------------------------*/
-    $meta_boxes[] = array(
-        'id'         => 'catalog_metadata',
-        'title'      => 'Данные по проекту',
-        'pages'      => array( 'catalog', ), // Post type
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'show_names' => true, // Show field names on the left
-        // 'show_on'    => array( 'key' => 'page-template', 'value' => array('template-press.php'), ), // Specific post templates to display this metabox
-        'fields'     => array(
-            array(
-                'name' => 'Цена парка',
-                'desc' => 'Укажите стоимость проекта',
-                'id'   => $prefix . 'catalog_price',                
-                'type' => 'text_money',
-            ),
-            array(
-                'name' => 'DWG file',
-                'desc' => 'Файл ландшафта',
-                'id'   => $prefix . 'fileupload',
-                'type' => 'file',
-            ),
-            array(
-                'name' => 'План №1',
-                'desc' => 'Загрузите фото проекта',
-                'id'   => $prefix . 'foto-1',
-                'type' => 'file',
-            ),
-            array(
-                'name' => 'План №2',
-                'desc' => 'Загрузите фото проекта',
-                'id'   => $prefix . 'foto-2',
-                'type' => 'file',
-            ),
-            array(
-                'name' => 'План №3',
-                'desc' => 'Загрузите фото проекта',
-                'id'   => $prefix . 'foto-3',
-                'type' => 'file',
-            ),
-
-                     
-        )
-    );
-
-
-     /*------------------------------------------------------------------------------------------
-    *                   МЕТАДАННЫЕ ДЛЯ ПОСТОВ РАЗДЕЛА ПРОЕКТЫ
-    *                   meta data for custom post type PROJECT
-    ------------------------------------------------------------------------------------------------*/
-    $meta_boxes[] = array(
-        'id'         => 'project_metadata',
-        'title'      => 'Данные по проекту',
-        'pages'      => array( 'project', ), // Post type
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'show_names' => true, // Show field names on the left        
-        'fields'    => array(
-            array(
-                'name' => 'Площадь парка',
-                'desc' => 'Площадь занимаемая парком',
-                'id'   => $prefix . 'area_park',
-                'type' => 'text',
-            ),
-
-            array(
-                'name' => 'Дней работ',
-                'desc' => 'Сколько ушло времени на строительство',
-                'id'   => $prefix . 'day_work',
-                'type' => 'text',
-            ),
-            array(
-                'name' => 'Адрес парка',
-                'desc' => 'Адрес будет использован для отображения точки на карте',
-                'id'   => $prefix . 'coordinate_park',
-                'type' => 'text',
-            ),
-            array(
-                'name' => 'Имя заказчика',
-                'desc' => 'Организация заказавшая парк',
-                'id'   => $prefix . 'whoes_name',
-                'type' => 'text',
-            ),
-            array(
-                'name'    => 'Тип заказчика',
-                'desc'    => 'Тип заказчика',
-                'id'      => $prefix . 'whoes_type',
-                'type'    => 'multicheck',
-                'options' => array(
-                    'state'    => 'Государственные',
-                    'business' => 'Бизнес',
-                    'private'  => 'Частные',
-                ),
-            ),
-        ),
         
-    );
-    /*
-    $meta_boxes[] = array(
-        'id'         => 'home_page_metabox',
-        'title'      => 'Home Meta Options',
-        'pages'      => array( 'page', ), // Post type
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'show_names' => true, // Show field names on the left
-        'show_on'    => array( 'key' => 'page-template', 'value' => array('page-home.php'), ), // Specific post templates to display this metabox
-
-        'fields' => array(
-            array(
-                'name' => 'Показать/Скрыть',
-                'desc' => 'Показать или скрыть цену на странице',
-                'id'   => 'catalog_show_metadata',
-                'type' => 'radio',
-                'options' => array(
-                    array(
-                        'name'  => 'Show',
-                        'value' => 'show'
-                    ),                    
-                ),
-            ),
-            array(
-                'name' => 'First Description',
-                'desc' => 'Insert the text',
-                'id'   => $prefix . 'descr1',
-                'type' => 'textarea',
-            ),
-            array(
-                'name' => 'Second Description',
-                'desc' => 'Insert the text',
-                'id'   => $prefix . 'descr2',
-                'type' => 'text',
-            ),
-            array(
-                'name' => 'File Upload',
-                'desc' => 'Insert the text',
-                'id'   => $prefix . 'fileupload',
-                'type' => 'file',
-            ),
-            array(
-                'name' => 'Text Date',
-                'desc' => 'Insert the text',
-                'id'   => $prefix . 'datefield',
-                'type' => 'wysiwyg',
-            ),
-        )
-    );
-    */
-    /*
-    $meta_boxes[] = array(
-        'id'         => '',
-        'title'      => '',
-        'pages'      => array( 'page', ), // Post type
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'show_names' => true, // Show field names on the left
-        'show_on'    => array( 'key' => 'page-template', 'value' => array('template-press.php'), ), // Specific post templates to display this metabox
-        'fields' => array(
-            array(
-                'name' => '',
-                'desc' => '',
-                'id'   => $prefix . '',
-                'type' => 'text',
-            ),
-            array(
-                'name' => '',
-                'desc' => '',
-                'id'   => $prefix . '',
-                'type' => 'file',
-            ),
-            array(
-                'name' => '',
-                'desc' => '',
-                'id'   => $prefix . '',
-                'type'    => 'wysiwyg',
-            ),            
-        )
-    );
-    */
 	return $meta_boxes;
 }
 
@@ -650,29 +470,6 @@ function aletheme_get_post_types() {
         /*
         *           end post type
         */
-
-        /*
-        * -------------------------------- POST TYPE - ВИДЕО ------------------------------------------------------------------
-        */
-        'video' => array(
-            'config' => array(
-                'public' => true,
-                'menu_position' => 10,
-                //'menu_icon' => 'dashicons-format-audio',
-                'has_archive'   => true,
-                'supports'=> array(
-                    'title',
-                    'editor',
-                    'thumbnail',
-                ),
-                'show_in_nav_menus'=> true,
-            ),
-            'singular' => 'Видео',
-            'multiple' => 'Видео'
-        ),
-        /*
-        *           end post type
-        */
     );
 }
 
@@ -813,3 +610,182 @@ function aletheme_get_post_types_with_gallery() {
 function aletheme_media_custom_fields() {
 	return array();
 }
+
+
+//var_dump( is_page() );
+function xsa_get_meta_box( $meta_boxes ) {
+    $prefix = 'xsa_';    
+/*
+*------------------------------------------------------------------------------------------
+*                   МЕТАДАННЫЕ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ
+*                   meta data for page-home.php
+*-------------------------------------------------------------------------------------------
+*/    
+    //  ищем номер поста в GET and POST переменных
+    // Get the current ID
+	if( isset( $_GET['post'] ) ) $post_id = $_GET['post'];    
+    elseif( isset( $_POST['post_ID'] ) ) $post_id = $_POST['post_ID'];        
+    
+    // Get current template
+    //  Пользуемся скрытыми метополями вордпресс
+    //  для каждой страницы шаблона есть метаполе с именем шаблона
+    //  скрыетое метополе _wp_page_template
+    if ($post_id) $current_template = get_post_meta( $post_id, '_wp_page_template', true );
+    else $current_template = '';
+    
+    //  проверяем если шаблон совпадает
+	if( $current_template  === "page-home.php" ) {
+      
+        $meta_boxes[] = array(
+            'id'            => $prefix . 'home_settings',
+            'title'         => 'Настройки для Главной страницы',
+            'post_types'    => array( 'page' ),
+            'context'       => 'advanced',
+            'priority'      => 'high',
+            'autosave'      => 'false',
+            'fields'        => array(
+                array(
+                    'type' => 'heading',
+                    'name' => 'Слайдер',
+                    'desc' => 'Настройки слайдера',
+                ),
+                array(
+                    'id' => $prefix . 'home_slider_image',
+                    'type' => 'image_advanced',
+                    'name' => 'Изображения для слайдера',
+                ),
+                array(
+                    'id'        => $prefix . 'home_slider_enable',
+                    'name'      => 'Описание',
+                    'label_description' => 'Небольшой текст отображается вместе с изображениме на слайде.',
+                    'type'      => 'switch',                
+                    // Стиль: rounded (по умолчанию) или square
+                    'style'     => 'rounded',
+                    'on_label'  => 'Показывать',
+                    'off_label' => 'Скрывать',
+                ),
+                
+                array(
+                    'name'    => 'Источник',
+                    'label_description' => 'Выбирите один из пунктов, откуда будет браться описание для изображения',
+                    'desc' => 'Отображаются в параметрах изображения. Например при выборе изображения в галереи.',
+                    'id'      => $prefix . 'home_slider_description',
+                    'type'    => 'radio',                    
+                    // Радиокнопки
+                    'options' => array(   
+                        'title'         => 'Заголовок',                     
+                        'caption'       => 'Подпись',
+                        'alt'           => 'Атрибут alt',
+                        'description'   => 'Описание',
+                    ),
+                    // Показывать в строку?
+                    'inline'  => false,
+                ),
+                array(
+                    'type' => 'divider',
+                ),                
+                
+            ),
+        );
+    }// end if for page-home.php	
+/*
+*       -----------------------------------------------------------
+*                   МЕТАДАННЫЕ ДЛЯ ПОСТОВ РАЗДЕЛА КАТАЛОГ
+*                   meta data for custom post type catalog
+*       ----------------------------------------------------------------
+*/
+    $meta_boxes[] = array(
+        'id'         => $prefix . 'catalog_one_type',
+        'title'      => 'Информация о проекте',
+        'pages'      => array( 'catalog', ), // Post type
+        'context'    => 'after_editor',
+        'priority'   => 'high',
+        'fields'     => array(
+            array(
+                'name' => 'Цена парка:',
+                'id'   => $prefix .'catalog_one_type_price',
+                'type' => 'number',
+            ),
+            array(
+                'id'               => $prefix . 'catalog_one_type_dwg_file',
+                'name'             => 'DWG file:',
+                'label_description' =>  "Файл ландшафта",
+                'type'             => 'file_advanced',
+            
+                // удалять файл из медиатеки при удалении из метаполя?
+                'force_delete'     => false,            
+                'max_file_uploads' => 1, // макс. можно загрузить            
+                // 'mime_type'        => 'application,audio,video', // типы файлов            
+                //'max_status'       => 'false', // Не показывать сколько еще файлов можно загрузить
+            ),
+            array(
+                'id' => $prefix . 'catalog_one_type_gallery',
+                'type' => 'image_advanced',
+                'name' => 'Планы проекта:',
+            ),
+                     
+        )
+    );
+/*
+*   ---------------------------------------------------------------------
+*                   МЕТАДАННЫЕ ДЛЯ ПОСТОВ РАЗДЕЛА ПРОЕКТЫ
+*                   meta data for custom post type PROJECT
+*   --------------------------------------------------------------------
+*/
+    $meta_boxes[] = array(
+        'id'         => $prefix . 'project_setting',
+        'title'      => 'Данные по проекту',
+        'pages'      => array( 'project', ), // Post type
+        'context'    => 'after_editor',
+        'priority'   => 'high',            
+        'fields'    => array(
+            array(
+                'name' => 'Площадь парка',
+                'desc' => 'Площадь занимаемая парком',
+                'id'   => $prefix . 'project_setting_area',
+                'type' => 'number',
+            ),
+
+            array(
+                'name' => 'Дней работ',
+                'desc' => 'Сколько ушло времени на строительство',
+                'id'   => $prefix . 'project_setting_day',
+                'type' => 'number',
+            ),
+            array(
+                'name' => 'Адрес парка',
+                'desc' => 'Адрес будет использован для отображения точки на карте',
+                'id'   => $prefix . 'project_setting_coordinate',
+                'type' => 'text',
+                'size' => 100,
+            ),
+            array(
+                'name' => 'Имя заказчика',
+                'desc' => 'Организация заказавшая парк',
+                'id'   => $prefix . 'project_setting_whoes_name',
+                'type' => 'text',
+                'size' => 100,
+            ),
+            array(
+                'name'    => 'Тип заказчика',
+                'desc'    => 'Тип заказчика',
+                'id'      => $prefix . 'project_setting_whoes_type',
+                'type'    => 'checkbox_list',
+                'options' => array(
+                    'state'    => 'Государственные',
+                    'business' => 'Бизнес',
+                    'private'  => 'Частные',
+                ),
+            ),
+        ),
+        
+    );
+    
+   
+    
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'xsa_get_meta_box' );
+
+ 

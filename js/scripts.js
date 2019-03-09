@@ -21,6 +21,20 @@ jQuery(function($) {
         controlNav: false
     });
 
+    /*
+    * слайдер на домашней странице
+    */
+    $('.flexslider').flexslider({
+        // Primary Controls
+        controlNav: false,               //Boolean: Create navigation for paging control of each clide? Note: Leave true for manualControls usage
+        directionNav: true,             //Boolean: Create navigation for previous/next navigation? (true/false)
+        prevText: "Previous",           //String: Set the text for the "previous" directionNav item
+        nextText: "Next",               //String: Set the text for the "next" directionNav item
+
+    }
+        
+    );
+
     var $grid = $('.grid').masonry({
             // options
             itemSelector: '.grid-item',
@@ -123,8 +137,8 @@ jQuery(function($) {
             type: 'POST',
             success: function(data) {
                 dataMap = JSON.parse(data);
-                console.log('получение данных по ajax');
-                console.log(dataMap);
+                //console.log('получение данных по ajax');
+                //console.log(dataMap);
                 counter = dataMap.points.length;
                 add_coords_data_map();
                 
@@ -137,13 +151,15 @@ jQuery(function($) {
         *   получаем в объект dataMap координаты каждого адреса
         */
         function add_coords_data_map() {
-            for( var i=0; i < dataMap.points.length; i++ ) {
+            for( var i=0; i < dataMap.points.length; i++ ) {                
+                if ( !dataMap.points[i].adress ) { counter--; continue; }
                 ymaps.geocode(dataMap.points[i].adress , {
                     results: 1
                     }).then( function (res) { 
                         var firstGeoObject = res.geoObjects.get(0),
                             coords = firstGeoObject.geometry.getCoordinates(),
                             request = res.metaData.geocoder.request;
+                        //console.log(coords);
                         //console.log(res);    
                         //console.log(request);
                         dataMap.points.forEach( function (point) {
@@ -153,6 +169,7 @@ jQuery(function($) {
                         });
 
                         counter--;
+                        //console.log(counter);
                         if (counter === 0) { add_points_to_map() };
 
                     }, function(err) {
@@ -172,6 +189,8 @@ jQuery(function($) {
             var myClusterer = new ymaps.Clusterer();
             
             dataMap.points.forEach( function(point) {
+                //console.log(point);
+                if (!point.adress) { return;};
                 var myPlacemark = new ymaps.Placemark(point.coords, {
                     hintContent: '<div class="yandexMaps-hintHeader"><p>' + point.title + '</p></div>',
                     balloonContentHeader: '<div class="yandexMaps-balloonHeader"><h3>' + point.title + '</h3></div>',
@@ -186,7 +205,7 @@ jQuery(function($) {
                 point.geoObject = myPlacemark;
                 
                 myClusterer.add(myPlacemark);
-            });
+            });            
             myMap.geoObjects.add(myClusterer);  
         }; // end add_points_to_map
 

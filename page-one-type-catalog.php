@@ -56,7 +56,7 @@ get_header();
             global $post;
             // Получаем массив объектов taxonomy
             $taxonomy = get_the_terms($id_page, 'catalog-category');
-
+            varDump( $taxonomy, 'taxonomy');
             //  Проходим все таксономи к которым относится страница
             //  И собираем все слаги от такосонми catalog-category в список
             foreach ($taxonomy as $obj_taxonomy) {
@@ -89,57 +89,53 @@ get_header();
             foreach($myposts as $post): 
         ?>
         <?php setup_postdata($post); ?>
-            <!-- Data -->    
+            <!-- Data -->
+            <?php 
+            /*
+            *   сформируем данныеи из мета данных поста catalog
+            */
+            $price = get_post_meta( get_the_ID() ,'xsa_catalog_one_type_price', true);
+            $images = get_post_meta( get_the_ID(), 'xsa_catalog_one_type_gallery');
+            $images_img = array_map(function($id) {
+                return $img = wp_get_attachment_image( $id, 'large' );               
+                }, $images);  
+            $dwg_file = get_post_meta( get_the_ID(), 'xsa_catalog_one_type_dwg_file', true); 
+            /*          end block meta data         */       
+            ?>    
+
             <div class="container">
                 <div class="catalog-up-row">
                     <div>
                         <div class="title"><?php the_title(); ?></div>
                     
-                        <?php if (ale_get_meta('catalog_price')): ?>
+                        <?php if ( $price ): ?>
                             <div class="price">
-                                <?php echo ale_get_meta('catalog_price'). ' деревянных'; ?>
+                                <?php echo $price . ' деревянных'; ?>
                             </div>    
                         <?php endif; ?>
-                
-                    
                     </div>
                 </div>
                 <!-- BLOCK FOTO SLIDER SLICK -->
-                <div class="slider-type">
-                <?php if(ale_get_meta('foto-1')): ?>
-                    <div >
-                        
-                        <img src = "<?php  ale_meta('foto-1'); ?>" alt = "">
-                        <div class = "poitns"></div>
-                        
+                <?php if( count($images_img != 0 ) ): ?>
+                <div class="slider-type">                
+                    <?php foreach( $images_img as $img_tag): ?>
+                    <div >                        
+                        <?php echo $img_tag; ?>
+                        <div class = "poitns"></div>                        
                     </div>
-                    <?php endif; ?>
-                    <?php if(ale_get_meta('foto-2')): ?>
-                    <div >
-                        <img src = "<?php  ale_meta('foto-2'); ?>" alt = "">
-                        <div class = "poitns"></div>
-                    </div>
-                    <?php endif; ?>
-                    <?php if(ale_get_meta('foto-3')): ?>
-                    <div >
-                        <img src = "<?php  ale_meta('foto-3'); ?>" alt = "">
-                        <div class = "poitns"></div>
-                    </div>
-                    <?php endif; ?>
-                    
+                    <?php endforeach; ?>
                 </div>
-            
-            
-
-
+                <?php endif; ?>          
+                <!--        end block slider        -->
+                
                 <div class = "content">
                     <?php the_content() ?>
+                    <?php if ( $dwg_file ): ?>
                     <div class = "download-dwg">
-                        <a href="<?php echo ale_get_meta('fileupload'); ?>">DWG</a>
+                        <a href="<?php echo wp_get_attachment_url( $dwg_file ); ?>">DWG</a>
                     </div>
-                    
-                </div>
-            
+                    <? endif; ?>
+                </div>            
             </div>
             
             

@@ -1,6 +1,7 @@
     <!-- Footer -->
 
     <hr>
+    <div class = "wrapper">
     <h1>Footer</h1>
     <nav class="footer-menu <?php if($post->post_type == "gallery" and !is_single()) { echo""; } elseif(is_page_template('template-contact.php') or is_page_template('template-about.php') or is_404() or is_page_template('template-award.php') or is_page_template('page-home.php')  or is_page_template('template-press.php')){  echo ""; } else { echo "no-fixed";}    ?>">
 
@@ -46,6 +47,7 @@
         <?php endif; ?>
 
     </nav>
+    </div>
     <!-- Scripts -->
     <?php wp_footer(); ?>
 

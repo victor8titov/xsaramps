@@ -174,7 +174,7 @@ function data_for_map() {
 		// запускаем цикл
 		while( have_posts() ): the_post();            
         $dataMap['points'][] = array(            
-                'adress'       => ale_get_meta('coordinate_park'),
+                'adress'       => get_post_meta( get_the_ID(), 'xsa_project_setting_coordinate', true ),
                 'title'        => get_the_title(),
                 'link'         => get_permalink(),
                 'ID'           => get_the_ID(),
@@ -192,3 +192,51 @@ function data_for_map() {
 };
 add_action('wp_ajax_data_for_map', 'data_for_map');
 add_action('wp_ajax_nopriv_data_for_map', 'data_for_map');
+
+
+
+/*
+*
+*   Определение функции выводящая всю информацию по изображения
+*   в виде массива
+*   example: image_info( $id_img, 'size = large' );
+*
+*/
+
+function image_info( $file, $args = array() ) {
+    $path = get_attached_file( $file );
+    if ( ! $path ) {
+        return false;
+    }
+
+    $args       = wp_parse_args(
+        $args,
+        array(
+            'size' => 'thumbnail',
+        )
+    );
+    $image      = wp_get_attachment_image_src( $file, $args['size'] );
+    $attachment = get_post( $file );
+    $info       = array(
+        'ID'          => $file,
+        'name'        => basename( $path ),
+        'path'        => $path,
+        'url'         => $image[0],
+        'full_url'    => wp_get_attachment_url( $file ),
+        'title'       => $attachment->post_title,
+        'caption'     => $attachment->post_excerpt,
+        'description' => $attachment->post_content,
+        'alt'         => get_post_meta( $file, '_wp_attachment_image_alt', true ),
+    );
+    if ( function_exists( 'wp_get_attachment_image_srcset' ) ) {
+        $info['srcset'] = wp_get_attachment_image_srcset( $file, $args['size'] );
+    }
+
+    $info = wp_parse_args( $info, wp_get_attachment_metadata( $file ) );
+
+    // Do not overwrite width and height by returned value of image meta.
+    $info['width']  = $image[1];
+    $info['height'] = $image[2];
+
+    return $info;
+};

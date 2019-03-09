@@ -26,13 +26,13 @@
                                 ?>
                             </div>
                             <div class="area">
-                                <?php echo ale_get_meta('area_park') ?> м<sup>2</sup>.
+                                <?php echo get_post_meta( get_the_ID(), 'xsa_project_setting_area', true ) ?> м<sup>2</sup>.
                             </div>
                             <div class="whoes">
-                                <?php ale_meta('whoes_name'); ?>
+                                <?php echo get_post_meta(get_the_ID(), 'xsa_project_setting_whoes_name', true ); ?>
                             </div>
                             <div class="point_map">
-                                <a href="#map" id="show_point_map" data-ID ="<?php echo get_the_ID(); ?>"><?php echo wp_trim_words(ale_get_meta('coordinate_park'), 5, '...'); ?></a>
+                                <a href="#map" id="show_point_map" data-ID ="<?php echo get_the_ID(); ?>"><?php echo wp_trim_words( get_post_meta(get_the_ID(), 'xsa_project_setting_coordinate', true ) , 5, '...'); ?></a>
                             </div>
                         </div>                        
                         <div class="content">

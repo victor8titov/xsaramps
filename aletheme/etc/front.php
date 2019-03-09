@@ -48,6 +48,8 @@ function ale_enqueue_styles() {
 	wp_register_style( 'slick-theme_css', THEME_URL . '/styles/libs/slick-theme.css');
 	wp_register_style( 'slick_css', THEME_URL . '/styles/libs/slick.css');
 
+	wp_register_style( 'flexslider', THEME_URL . '/styles/libs/flexslider.css');
+	wp_enqueue_style('flexslider');
 
 	wp_enqueue_style('aletheme_general_css');
 	wp_enqueue_style('slick-theme_css');
@@ -97,6 +99,14 @@ function is_blog () {
  */
 function ale_enqueue_scripts() {
 
+	// отменяем зарегистрированный jQuery
+	// вместо "jquery-core", можно вписать "jquery", тогда будет отменен еще и jquery-migrate
+	//wp_deregister_script( 'jquery-core' );
+	//wp_register_script( 'jquery-core', '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js');
+	//wp_enqueue_script( 'jquery' );
+
+
+
 	// add html5 for old browsers.
 	wp_register_script( 'html5-shim', 'http://html5shim.googlecode.com/svn/trunk/html5.js', array( 'jquery' ), ALETHEME_THEME_VERSION, false );
 	// add modernizr
@@ -107,7 +117,14 @@ function ale_enqueue_scripts() {
 	//	add masonory for gallary 
 	wp_register_script( 'ale_masonry', THEME_URL . '/js/libs/masonry.pkgd.min.js', array( 'jquery' ), ALETHEME_THEME_VERSION, false );
 
-    wp_register_script( 'ale_modules', THEME_URL . '/js/modules.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
+	/*
+	*	modules.js в нем находится библиотека flexslider 2.1
+	*	применяется видимо для встроенного слайдера	
+	*
+	*/
+	//wp_register_script( 'ale_modules', THEME_URL . '/js/modules.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
+	
+
     wp_register_script( 'ale_scripts', THEME_URL . '/js/scripts.js', array( 'jquery' ), ALETHEME_THEME_VERSION, false );
 
 	wp_register_script( 'jquery.mousewheel', THEME_URL . '/js/libs/jquery.mousewheel.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
@@ -115,9 +132,20 @@ function ale_enqueue_scripts() {
     wp_register_script( 'jquery.jscrollpane.min', THEME_URL . '/js/libs/jquery.jscrollpane.min.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
     wp_register_script( 'scrollable', THEME_URL . '/js/libs/scrollable.js', array( 'jquery' ), ALETHEME_THEME_VERSION, true );
 	
-	// 	скрипт для работы слайдера на основе библиотеки slick 
-	//	http://kenwheeler.github.io/slick/
+	/*
+	* 	скрипт для работы слайдера на основе библиотеки slick 
+	*	http://kenwheeler.github.io/slick/
+	*
+	*/
 	wp_register_script(	'slick', THEME_URL . '/js/libs/slick.min.js', array( 'jquery' ));
+
+	/*
+	*	flexslider 2.7.1
+	*	библиотека для слайдера 
+	*	такая же подключена в файле modules.js но поздней версии
+	*	
+	*/
+	wp_register_script(	'flexslider', THEME_URL . '/js/libs/jquery.flexslider-min.js', array( 'jquery' ));
 
 	//wp_enqueue_script( 'jquery-form' );
 	wp_enqueue_script( 'ale_modernizr' );
@@ -130,9 +158,10 @@ function ale_enqueue_scripts() {
     wp_enqueue_script( 'jquery.fancybox' );
     wp_enqueue_script( 'jquery.jscrollpane.min' );
     wp_enqueue_script( 'scrollable' );
-    wp_enqueue_script( 'ale_modules' );
+    //wp_enqueue_script( 'ale_modules' );
 	wp_enqueue_script( 'ale_scripts' );
 	wp_enqueue_script( 'slick');
+	wp_enqueue_script(	'flexslider' );
 	
 	
 
